@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Workers Categories</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f4f6;
+      color: #333;
+    }
+
+    /* Navbar */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .logo h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .logo h1 span {
+      color: #9333ea; /* Purple */
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #9333ea;
+    }
+
+    .login, .register {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .login {
+      background: #9333ea;
+      color: #333;
+    }
+
+    .register {
+      background: #9333ea;
+      color: #fff;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    /* Search bar */
+    .search-box {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .search-box input {
+      width: 100%;
+      max-width: 400px;
+      padding: 12px 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .search-box input:focus {
+      border-color: #9333ea;
+      box-shadow: 0 0 8px rgba(147, 51, 234, 0.3);
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 30px;
+    }
+
+    .category {
+      background-color: #f9fafb;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      cursor: pointer;
+    }
+
+    .category:hover {
+      background-color: #f3e8ff;
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .category img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 2px solid #ddd;
+    }
+
+    .category p {
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img src=\"/images/skilledboyslogo1.png\" alt=\"Logo\" />
+        <h1>Skilled<span>Boys</span></h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="category.html">Categories</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><button class="login"> Login </button></li>
+          <li><button class="register">Register</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Categories Section -->
+  <div class="container">
+    <h2>Workers Categories</h2>
+
+    <!-- Search bar -->
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search categories...">
+    </div>
+
+    <div class="grid" id="categoryGrid">
+      <div class="category"><img src="/images/electrician.png"><p>Electrician</p></div>
+      <div class="category"><img src="/images/plumber.png"><p>Plumber</p></div>
+      <div class="category"><img src="/images/carpanter.png"><p>Carpenter</p></div>
+      <div class="category"><img src="/images/painter.png"><p>Painter</p></div>
+      <div class="category"><img src="/images/maid.png"><p>Maid</p></div>
+      <div class="category"><img src="/images/cook.png"><p>Cook</p></div>
+      <div class="category"><img src="/images/driver.png"><p>Driver</p></div>
+      <div class="category"><img src="/images/garder.png"><p>Gardener</p></div>
+      <div class="category"><img src="/images/housekeeper.png"><p>Housekeeper</p></div>
+      <div class="category"><img src="/images/cleaner.png"><p>Cleaner</p></div>
+      <div class="category"><img src="/images/Interior.png"><p>Interior Designer</p></div>
+      <div class="category"><img src="/images/trainer.png"><p>Fitness Trainer</p></div>
+      <div class="category"><img src="/images/Yoga.png"><p>Yoga Instructor</p></div>
+      <div class="category"><img src="/images/teacher.png"><p>Teacher</p></div>
+      <div class="category"><img src="/images/nurse.png"><p>Nurse</p></div>
+      <div class="category"><img src="/images/baby.png"><p>Babysitter</p></div>
+      <div class="category"><img src="/images/gurd.png"><p>Security Guard</p></div>
+      <div class="category"><img src="/images/chef.png"><p>Chef</p></div>
+      <div class="category"><img src="/images/builder.png"><p>Builder</p></div>
+      <div class="category"><img src="/images/labour.png"><p>Labour</p></div>
+    </div>
+  </div>
+
+  <!-- Script for search filter -->
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const categories = document.querySelectorAll(".category");
+
+    searchInput.addEventListener("input", function() {
+      const query = searchInput.value.toLowerCase();
+      categories.forEach(cat => {
+        const text = cat.textContent.toLowerCase();
+        cat.style.display = text.includes(query) ? "block" : "none";
+      });
+    });
+  </script>
+
+</body>
+</html>

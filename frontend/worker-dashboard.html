@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Worker Dashboard - SkilledBoys</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+
+  <!-- LEFT: Job Alerts -->
+  <div class="w-2/3 p-6">
+    <h2 class="text-2xl font-bold text-blue-700 mb-4">📢 New Job Alerts</h2>
+    <div id="jobList" class="space-y-4"></div>
+  </div>
+
+  <!-- RIGHT: Worker Info -->
+  <div class="w-1/3 p-6 bg-white shadow-lg rounded-xl h-fit sticky top-6">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">👷 Worker Profile</h2>
+    <div id="workerCard" class="p-4 border rounded-lg bg-gray-50 space-y-2">
+      <!-- Worker details will load dynamically -->
+    </div>
+
+    <!-- Working Status -->
+    <div class="mt-4">
+      <button id="statusBtn" class="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700">
+        ✅ I am Working
+      </button>
+    </div>
+  </div>
+<script>
+  // --- Get token from localStorage (set after login) ---
+  const token = localStorage.getItem("token");
+const workerId = localStorage.getItem("workerId");
+
+if (!token || !workerId) {
+  alert("You are not logged in!");
+  window.location.href = "worker-login.html";
+}
+
+  // --- Worker Status ---
+  let isWorking = true;
+  const statusBtn = document.getElementById("statusBtn");
+
+  function updateStatusBtn() {
+    statusBtn.textContent = isWorking ? "✅ I am Working" : "⛔ I am Not Working";
+    statusBtn.className = isWorking
+      ? "w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700"
+      : "w-full bg-red-600 text-white p-3 rounded-lg hover:bg-red-700";
+  }
+
+  statusBtn.addEventListener("click", async () => {
+    isWorking = !isWorking;
+    updateStatusBtn();
+    try {
+      await fetch(`http://localhost:5000/api/workers/status`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ status: isWorking ? "working" : "not working" })
+      });
+    } catch (err) {
+      console.error("Error updating status:", err);
+    }
+  });
+
+  // --- Load Worker Profile from backend ---
+  async function loadWorkerProfile() {
+    try {
+      const res = await fetch("http://localhost:5000/api/workers/profile", {
+        headers: { "Authorization": `Bearer ${token}` }
+      });
+      const data = await res.json();
+      if (data.success) {
+        const worker = data.worker;
+        isWorking = worker.status === "working";
+        updateStatusBtn();
+
+        document.getElementById("workerCard").innerHTML = `
+          <p><b>Name:</b> ${worker.name}</p>
+          <p><b>Phone:</b> ${worker.number}</p>
+          <p><b>Category:</b> ${worker.category}</p>
+          <p><b>Location:</b> ${worker.location}</p>
+          <p><b>Age:</b> ${worker.age}</p>
+          <p><b>Gender:</b> ${worker.gender}</p>
+        `;
+      } else {
+        alert("Failed to load worker profile");
+      }
+    } catch (err) {
+      console.error("Error fetching profile:", err);
+      alert("Error fetching worker profile");
+    }
+  }
+
+  // --- Dummy Job Alerts ---
+  const jobs = [
+    { id: 1, customer: "Ravi Kumar", number: "9871112233", location: "Noida", category: "Fan Repair" },
+    { id: 2, customer: "Pooja Singh", number: "9812345678", location: "Delhi", category: "Wiring Issue" },
+    { id: 3, customer: "Suresh Verma", number: "9911223344", location: "Ghaziabad", category: "Switch Board Repair" },
+  ];
+
+  function loadJobAlerts() {
+    const jobList = document.getElementById("jobList");
+    jobs.forEach(job => {
+      const jobCard = document.createElement("div");
+      jobCard.className = "p-4 bg-white shadow-lg rounded-lg border hover:shadow-xl transition";
+      jobCard.innerHTML = `
+        <h3 class="text-lg font-semibold text-gray-800">${job.category}</h3>
+        <p><b>Customer:</b> ${job.customer}</p>
+        <p><b>Phone:</b> ${job.number}</p>
+        <p><b>Location:</b> ${job.location}</p>
+        <div class="flex gap-2 mt-3">
+          <button onclick="acceptJob(${job.id})" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">✅ Accept</button>
+          <button onclick="rejectJob(${job.id})" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">❌ Reject</button>
+        </div>
+      `;
+      jobList.appendChild(jobCard);
+    });
+  }
+
+  function acceptJob(id) { alert(`Job ${id} accepted ✅`); }
+  function rejectJob(id) { alert(`Job ${id} rejected ❌`); }
+
+  // --- INIT ---
+  loadWorkerProfile();
+  loadJobAlerts();
+</script>
+
+ 
+</body>
+</html>

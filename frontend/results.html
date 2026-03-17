@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worker Results</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center space-x-2">
+        <img src="/images/skilledboyslogo1.png" alt="Logo" class="h-10 w-auto" />
+        <span class="text-2xl font-bold"><span class="text-black">Skilled</span><span class="text-purple-600">Boys</span></span>
+      </div>
+      <nav class="hidden md:flex space-x-6">
+        <a href="/" class="hover:text-purple-600">Home</a>
+        <a href="landing.html" class="hover:text-purple-600">Find Workers</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container mx-auto p-6">
+    <h1 id="title" class="text-4xl font-bold text-center mb-8 text-gray-800">Search Results</h1>
+    
+    <div id="workerList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Workers will load here -->
+    </div>
+  </div>
+
+  <script>
+    async function loadWorkers() {
+      // Get query params (category & location)
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get("category");
+      const location = params.get("location");
+
+      // Update title
+      document.getElementById("title").textContent = `${category || "All"} Workers in ${location || "Your Area"}`;
+
+      try {
+        // Fetch workers from backend
+        const res = await fetch(`http://localhost:5000/api/workers?category=${category}&location=${location}`);
+        const workers = await res.json();
+
+        const workerList = document.getElementById("workerList");
+        workerList.innerHTML = "";
+
+        if (!workers || workers.length === 0) {
+          workerList.innerHTML = `
+            <div class="col-span-full text-center py-12">
+              <p class="text-xl text-red-500 font-semibold">❌ No workers found for this search.</p>
+              <p class="text-gray-600 mt-2">Try searching with different criteria.</p>
+              <a href="landing.html" class="mt-4 inline-block px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">← Back to Search</a>
+            </div>
+          `;
+          return;
+        }
+
+        // Display workers in cards
+        workers.forEach(worker => {
+          const card = `
+            <div class="bg-white shadow-lg rounded-2xl p-6 hover:shadow-xl transition">
+              <div class="text-center">
+                <i class="fas fa-user-circle text-6xl text-purple-600 mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-900">${worker.name}</h2>
+                <p class="text-lg text-purple-600 font-semibold mt-2">${worker.category}</p>
+              </div>
+              
+              <div class="mt-4 space-y-2 text-gray-700">
+                <p><strong>📍 Location:</strong> ${worker.location}</p>
+                <p><strong>📞 Phone:</strong> ${worker.phone || worker.number}</p>
+                <p><strong>👤 Gender:</strong> ${worker.gender}</p>
+                <p><strong>🎂 Age:</strong> ${worker.age} years</p>
+                <p><strong>💼 Experience:</strong> ${worker.experience} years</p>
+                <p><strong>⭐ Rating:</strong> ${worker.rating} / 5.0</p>
+              </div>
+              
+              <div class="mt-6 flex gap-3">
+                <a href="tel:${worker.phone || worker.number}" class="flex-1 bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition text-center font-semibold">
+                  <i class="fas fa-phone"></i> Call Now
+                </a>
+                <button onclick="saveWorker('${worker._id}', '${worker.name}')" class="flex-1 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold">
+                  <i class="fas fa-bookmark"></i> Save
+                </button>
+              </div>
+            </div>
+          `;
+          workerList.innerHTML += card;
+        });
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById("workerList").innerHTML = `
+          <div class="col-span-full text-center py-12">
+            <p class="text-xl text-red-500 font-semibold">⚠️ Error loading workers</p>
+            <p class="text-gray-600 mt-2">Make sure the backend server is running on port 5000</p>
+            <a href="landing.html" class="mt-4 inline-block px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">← Back to Search</a>
+          </div>
+        `;
+      }
+    }
+
+    function saveWorker(workerId, workerName) {
+      alert(`✅ ${workerName} saved to your favorites!`);
+    }
+
+    // Load workers on page load
+    loadWorkers();
+  </script>
+</body>
+</html>

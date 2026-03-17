@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search Results - SkilledBoys</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4ff, #eaf3ff);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #222;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .worker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+      padding: 0 10px;
+    }
+
+    .worker-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .worker-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .worker-card .icon {
+      font-size: 70px;
+      color: #4f46e5;
+      margin-bottom: 12px;
+    }
+
+    .worker-card h3 {
+      margin: 8px 0;
+      color: #4f46e5;
+      font-size: 1.3rem;
+    }
+
+    .worker-card p {
+      margin: 6px 0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .rating {
+      margin-top: 8px;
+      font-weight: bold;
+      color: #f59e0b;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 18px;
+      background: linear-gradient(90deg, #4f46e5, #6366f1);
+      color: #fff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      background: linear-gradient(90deg, #4338ca, #4f46e5);
+    }
+
+    .loading {
+      text-align: center;
+      font-size: 18px;
+      color: #4f46e5;
+    }
+
+    .no-results {
+      text-align: center;
+      font-size: 18px;
+      color: #ef4444;
+      grid-column: 1 / -1;
+    }
+
+    /* Responsive text scaling */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      .worker-card {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="title">Search Results</h1>
+
+  <div class="worker-grid" id="grid">
+    <div class="loading">Loading workers...</div>
+  </div>
+
+  <script>
+    async function loadResults() {
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get("category");
+      const location = params.get("location");
+
+      // Update title
+      document.getElementById("title").textContent = `${category || "All"} Workers in ${location || "Your Area"}`;
+
+      try {
+        const res = await fetch(`http://localhost:5000/api/workers?category=${category || ""}&location=${location || ""}`);
+        const workers = await res.json();
+
+        const grid = document.getElementById("grid");
+        grid.innerHTML = "";
+
+        if (!workers || workers.length === 0) {
+          grid.innerHTML = '<div class="no-results">❌ No workers found. Try searching with different criteria.</div>';
+          return;
+        }
+
+        workers.forEach((worker) => {
+          const card = document.createElement('div');
+          card.className = 'worker-card';
+          
+          card.innerHTML = `
+            <div class="icon"><i class="fas fa-user-circle"></i></div>
+            <h3>${worker.name}</h3>
+            <p><strong>Profession:</strong> ${worker.category}</p>
+            <p><strong>Location:</strong> ${worker.location}</p>
+            <p><strong>Contact:</strong> ${worker.phone || worker.number}</p>
+            <p><strong>Age:</strong> ${worker.age}</p>
+            <p><strong>Gender:</strong> ${worker.gender}</p>
+            <p><strong>Experience:</strong> ${worker.experience} years</p>
+            <p class="rating"><strong>Rating:</strong> ${worker.rating} ⭐</p>
+            <a href="tel:${worker.phone || worker.number}" class="contact-btn"><i class="fas fa-phone-alt"></i> Call Now</a>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (error) {
+        console.error("Error loading workers:", error);
+        document.getElementById("grid").innerHTML = '<div class="no-results">❌ Error loading workers. Make sure the server is running.</div>';
+      }
+    }
+
+    loadResults();
+  </script>
+
+</body>
+</html>
