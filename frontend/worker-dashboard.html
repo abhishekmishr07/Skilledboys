@@ -53,7 +53,7 @@ if (!token || !workerId) {
     isWorking = !isWorking;
     updateStatusBtn();
     try {
-      await fetch(`http://localhost:5000/api/workers/status`, {
+      await fetch(`https://skilledboys-backend-u54y.onrender.com/api/workers/status`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +69,7 @@ if (!token || !workerId) {
   // --- Load Worker Profile from backend ---
   async function loadWorkerProfile() {
     try {
-      const res = await fetch("http://localhost:5000/api/workers/profile", {
+      const res = await fetch("https://skilledboys-backend-u54y.onrender.com/api/workers/profile", {
         headers: { "Authorization": `Bearer ${token}` }
       });
       const data = await res.json();

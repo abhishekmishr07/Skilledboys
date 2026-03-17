@@ -43,7 +43,7 @@
 
       try {
         // Fetch workers from backend
-        const res = await fetch(`http://localhost:5000/api/workers?category=${category}&location=${location}`);
+        const res = await fetch(`https://skilledboys-backend-u54y.onrender.com/api/workers?category=${category}&location=${location}`);
         const workers = await res.json();
 
         const workerList = document.getElementById("workerList");
