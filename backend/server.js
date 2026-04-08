@@ -199,4 +199,9 @@ app.get("/api/health", (req, res) => {
 });
 
 // ✅ Start server
-app.listen(5000, () => console.log("🚀 Server running on https://skilledboys-backend-u54y.onrender.com"));
+//app.listen(5000, () => console.log("🚀 Server running on https://skilledboys-backend-u54y.onrender.com"));
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
