@@ -15,11 +15,12 @@ const JWT_SECRET = process.env.JWT_SECRET || "skilledboys_secret";
 
 // MongoDB Connect
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb+srv://abhishekmishraadev_db_user:Abhishek%402003@abhishekdb.idmxnex.mongodb.net/SkilledBoys")
+  .connect(
+    process.env.MONGO_URI ||
+      "mongodb+srv://abhishekmishraadev_db_user:Abhishek%402003@abhishekdb.idmxnex.mongodb.net/SkilledBoys"
+  )
   .then(() => console.log("✅ MongoDB Atlas connected successfully"))
-  .catch((err) => {
-    console.error("❌ MongoDB connection error:", err.message);
-  });
+  .catch((err) => console.error("❌ MongoDB connection error:", err.message));
 
 // Worker Schema
 const workerSchema = new mongoose.Schema({
@@ -57,6 +58,11 @@ function authMiddleware(req, res, next) {
   }
 }
 
+// Root
+app.get("/", (req, res) => {
+  res.send("SkilledBoys Backend Running 🚀");
+});
+
 // Health Check
 app.get("/api/health", (req, res) => {
   res.json({ success: true, message: "✅ Server is running!" });
@@ -79,16 +85,16 @@ app.post("/api/workers/register", async (req, res) => {
     const newWorker = new Worker({
       name,
       number,
-      phone: number,
-      password: hashedPassword,
+      phone:      number,
+      password:   hashedPassword,
       category,
       location,
       experience: experience || 0,
       gender,
-      startTime: startTime || "09:00",
-      endTime: endTime || "18:00",
+      startTime:  startTime || "09:00",
+      endTime:    endTime || "18:00",
       age,
-      photo: photo || "https://via.placeholder.com/150",
+      photo:      photo || "https://via.placeholder.com/150",
     });
 
     await newWorker.save();
@@ -153,7 +159,7 @@ app.get("/api/workers", async (req, res) => {
   const { category, location } = req.query;
   let query = {};
   if (category) query.category = new RegExp(`^${category}$`, "i");
-  if (location) query.location = new RegExp(`^${location}$`, "i");
+  if (location)  query.location  = new RegExp(`^${location}$`,  "i");
 
   try {
     const workers = await Worker.find(query).select("-password");
@@ -192,14 +198,8 @@ app.put("/api/workers/:id", async (req, res) => {
   }
 });
 
-// Root
-
-
 // Start Server
 const PORT = process.env.PORT || 5000;
-app.get("/", (req, res) => {
-  res.send("SkilledBoys Backend Running 🚀");
-});
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
