@@ -127,7 +127,7 @@
       document.getElementById("title").textContent = `${category || "All"} Workers in ${location || "Your Area"}`;
 
       try {
-        const res = await fetch(`https://skilledboys-backend-u54y.onrender.com/api/workers?category=${category || ""}&location=${location || ""}`);
+        const res = await fetch(`https://skilledboys.onrender.com/api/workers?category=${category || ""}&location=${location || ""}`);
         const workers = await res.json();
 
         const grid = document.getElementById("grid");
