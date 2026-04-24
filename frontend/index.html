@@ -30,179 +30,9 @@
       transform: translateY(0);
     }
 
-    .typed-cursor { color: var(--brand); font-weight: bold; }
-
-    /* ===== Animated Stats ===== */
-    .stat-num { font-size:1.4rem; font-weight:800; color:#7c3aed; display:block; }
-    .stat-lbl { font-size:0.78rem; color:#6b7280; margin-top:2px; }
-
-    /* ===== How It Works ===== */
-    .hiw-section { background:#fff; padding:72px 24px; }
-    .hiw-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; max-width:960px; margin:40px auto 0; }
-    @media(max-width:700px){ .hiw-grid{grid-template-columns:1fr;} }
-    .hiw-card { text-align:center; position:relative; }
-    .hiw-icon { width:72px; height:72px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem; margin:0 auto 20px; }
-    .hiw-num { position:absolute; top:-8px; right:calc(50% - 44px); width:24px; height:24px; background:#7c3aed; color:#fff; border-radius:50%; font-size:0.72rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
-    .hiw-connector { position:absolute; top:36px; left:calc(50% + 44px); width:calc(100% - 88px); height:2px; background:linear-gradient(90deg,#7c3aed,#a78bfa); border-radius:2px; }
-    @media(max-width:700px){ .hiw-connector{ display:none; } }
-    .hiw-title { font-size:1.05rem; font-weight:700; color:#111827; margin-bottom:8px; }
-    .hiw-desc { font-size:0.88rem; color:#6b7280; line-height:1.6; }
-
-    /* ===== Dot Indicators ===== */
-    .cat-dots { display:flex; justify-content:center; gap:8px; margin-top:20px; padding-right:24px; }
-    .cat-dot { width:8px; height:8px; border-radius:50%; background:#d1c4e9; border:none; padding:0; cursor:pointer; transition:all 0.3s; }
-    .cat-dot.active { width:24px; border-radius:4px; background:#7c3aed; }
-
-    /* ===== Testimonials ===== */
-    .testi-section { background:#f9f5ff; padding:72px 24px; }
-    .testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:1100px; margin:40px auto 0; }
-    @media(max-width:900px){ .testi-grid{grid-template-columns:1fr 1fr;} }
-    @media(max-width:580px){ .testi-grid{grid-template-columns:1fr;} }
-    .testi-card { background:#fff; border-radius:20px; padding:28px 24px; box-shadow:0 4px 20px rgba(124,58,237,0.08); position:relative; }
-    .testi-card::before { content:'"'; position:absolute; top:16px; left:20px; font-size:4rem; color:#ede9fe; font-family:Georgia,serif; line-height:1; }
-    .testi-stars { color:#f59e0b; font-size:0.95rem; margin-bottom:12px; }
-    .testi-text { font-size:0.9rem; color:#374151; line-height:1.7; margin-bottom:20px; position:relative; z-index:1; }
-    .testi-author { display:flex; align-items:center; gap:12px; }
-    .testi-avatar { width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#7c3aed,#a78bfa); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:1.1rem; }
-    .testi-name { font-weight:700; font-size:0.9rem; color:#111827; }
-    .testi-role { font-size:0.78rem; color:#9ca3af; }
-
-    /* ===== Full Footer ===== */
-    .site-footer { background:#111827; color:#d1d5db; padding:56px 24px 24px; }
-    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:40px; max-width:1100px; margin:0 auto; }
-    @media(max-width:768px){ .footer-grid{grid-template-columns:1fr 1fr;} }
-    @media(max-width:480px){ .footer-grid{grid-template-columns:1fr;} }
-    .footer-brand p { font-size:0.875rem; color:#9ca3af; line-height:1.7; margin:12px 0 20px; }
-    .footer-socials { display:flex; gap:12px; }
-    .footer-social-btn { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.1rem; text-decoration:none; transition:transform 0.2s; }
-    .footer-social-btn:hover { transform:translateY(-3px); }
-    .footer-col h4 { font-weight:700; color:#f9fafb; margin-bottom:16px; font-size:0.95rem; }
-    .footer-col ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
-    .footer-col ul li a { color:#9ca3af; text-decoration:none; font-size:0.875rem; transition:color 0.2s; }
-    .footer-col ul li a:hover { color:#a78bfa; }
-    .footer-bottom { max-width:1100px; margin:32px auto 0; padding-top:20px; border-top:1px solid #1f2937; text-align:center; font-size:0.82rem; color:#6b7280; }
-
-    /* ===== Floating WhatsApp ===== */
-    .wa-fab { position:fixed; bottom:28px; right:28px; z-index:999; width:60px; height:60px; border-radius:50%; background:#25d366; box-shadow:0 6px 20px rgba(37,211,102,0.45); display:flex; align-items:center; justify-content:center; text-decoration:none; animation:waPulse 2.5s infinite; transition:transform 0.2s; }
-    .wa-fab:hover { transform:scale(1.1); }
-    .wa-fab img { width:34px; height:34px; object-fit:contain; }
-    @keyframes waPulse { 0%,100%{box-shadow:0 6px 20px rgba(37,211,102,0.45);} 50%{box-shadow:0 6px 32px rgba(37,211,102,0.7);} }
-
-    /* ===== Explore Categories Carousel ===== */
-    .categories-section {
-      background: #f3f0ff;
-      padding: 64px 0 64px 24px;
-      overflow: hidden;
-    }
-    .cat-carousel-wrapper {
-      position: relative;
-      margin-top: 32px;
-    }
-    /* Scroll track */
-    .categories-track {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      scrollbar-width: none;          /* Firefox */
-      -ms-overflow-style: none;       /* IE/Edge */
-      padding-bottom: 12px;
-      padding-right: 24px;
-      cursor: grab;
-      user-select: none;
-    }
-    .categories-track::-webkit-scrollbar { display: none; }
-    .categories-track.dragging { cursor: grabbing; scroll-behavior: auto; }
-    /* Individual card */
-    .cat-card {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      height: 280px;
-      min-width: 300px;
-      flex-shrink: 0;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      text-decoration: none;
-      display: block;
-    }
-    .cat-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(124,58,237,0.25);
-    }
-    .cat-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-      pointer-events: none;
-    }
-    .cat-card:hover img { transform: scale(1.08); }
-    .cat-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 60%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 22px 20px;
-    }
-    .cat-title {
-      color: #fff;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .cat-sub {
-      color: rgba(255,255,255,0.82);
-      font-size: 0.82rem;
-    }
-    .cat-badge {
-      display: inline-block;
-      background: rgba(124,58,237,0.85);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 2px 10px;
-      border-radius: 20px;
-      margin-bottom: 8px;
-      width: fit-content;
-    }
-    /* Arrow buttons */
-    .cat-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #fff;
-      border: none;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.16);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      color: #7c3aed;
-      transition: background 0.2s, box-shadow 0.2s;
-    }
-    .cat-arrow:hover {
-      background: #7c3aed;
-      color: #fff;
-      box-shadow: 0 6px 20px rgba(124,58,237,0.35);
-    }
-    .cat-arrow-left  { left: -16px; }
-    .cat-arrow-right { right: 8px; }
-    /* Fade edge on right */
-    .cat-carousel-wrapper::after {
-      content: '';
-      position: absolute;
-      right: 0; top: 0; bottom: 12px;
-      width: 80px;
-      background: linear-gradient(to right, transparent, #f3f0ff);
-      pointer-events: none;
+    .typed-cursor {
+      color: var(--brand);
+      font-weight: bold;
     }
   </style>
 </head>
@@ -224,15 +54,15 @@
       <nav class="hidden md:block">
         <ul class="flex items-center space-x-6 text-gray-700 font-medium">
           <li><a href="landing.html" class="hover:text-purple-600 transition">Home</a></li>
-          <li><a href="/frontend/category.html" class="hover:text-purple-600 transition">Workers</a></li>
-          <li><a href="/frontend/area.html" class="hover:text-purple-600 transition">Available in</a></li>
-          <li><a href="/frontend/contact.html" class="hover:text-purple-600 transition">Support</a></li>
-          <li><a href="/frontend/about.html" class="hover:text-purple-600 transition">About Us</a></li>
-          <li><a href="/frontend/login.html"
+          <li><a href="category.html" class="hover:text-purple-600 transition">Workers</a></li>
+          <li><a href="area.html" class="hover:text-purple-600 transition">Available in</a></li>
+          <li><a href="contact.html" class="hover:text-purple-600 transition">Support</a></li>
+          <li><a href="about.html" class="hover:text-purple-600 transition">About Us</a></li>
+          <!-- <li><a href="login.html"
               class="px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 transition">Login</a></li>
-          <li><a href="/frontend/register.html"
+          <li><a href="register.html"
               class="px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 transition">Sign Up</a></li>
-        </ul>
+        </ul> -->
       </nav>
 
       <!-- Mobile Hamburger -->
@@ -246,16 +76,16 @@
       class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out md:hidden bg-white shadow-lg">
       <ul class="flex flex-col space-y-4 py-6 px-6 text-gray-700 font-medium">
         <li><a href="landing.html" class="hover:text-purple-600 transition">Home</a></li>
-        <li><a href="/frontend/category.html" class="hover:text-purple-600 transition">Workers</a></li>
-        <li><a href="/frontend/area.html" class="hover:text-purple-600 transition">Available in</a></li>
-        <li><a href="/frontend/contact.html" class="hover:text-purple-600 transition">Support</a></li>
-        <li><a href="/frontend/about.html" class="hover:text-purple-600 transition">About Us</a></li>
-        <li><a href="/frontend/login.html"
+        <li><a href="category.html" class="hover:text-purple-600 transition">Workers</a></li>
+        <li><a href="area.html" class="hover:text-purple-600 transition">Available in</a></li>
+        <li><a href="contact.html" class="hover:text-purple-600 transition">Support</a></li>
+        <li><a href="about.html" class="hover:text-purple-600 transition">About Us</a></li>
+        <!-- <li><a href="login.html"
             class="px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 transition block text-center">Login</a>
         </li>
-        <li><a href="/frontend/register.html"
+        <li><a href="register.html"
             class="px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 transition block text-center">Sign
-            Up</a></li>
+            Up</a></li> -->
       </ul>
     </div>
   </header>
@@ -288,314 +118,37 @@
                 <div class="text-sm text-gray-500">Get more jobs near you & grow.</div>
               </div>
             </div>
-            <div class="mt-4 inline-flex items-center gap-2 text-purple-600 font-semibold"> Continue <span
+            <div class="mt-4 inline-flex items-center gap-2 text-purple-600 font-semi bold"> Continue <span
                 class="translate-x-0 group-hover:translate-x-1 transition">→</span> </div>
           </button> </div>
       </div> <!-- Right image -->
       <div class="fade-up"> <img src="/images/logoskilled.png" alt="Workers Illustration"
           class="w-full rounded-3xl shadow-2xl ring-1 ring-black/5 hover:scale-[1.02] transition duration-500"> </div>
     </div> <!-- Trust badges -->
-    <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center" id="statsSection">
+    <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
       <div class="bg-white rounded-2xl p-4 shadow-sm fade-up">
-        <span class="stat-num" data-target="15000" data-suffix="+">0</span>
-        <div class="stat-lbl">Happy Customers</div>
+        <div class="text-xl font-bold text-gray-900">15,000+</div>
+        <div class="text-gray-500 text-sm">Happy Customers</div>
       </div>
       <div class="bg-white rounded-2xl p-4 shadow-sm fade-up">
-        <span class="stat-num" data-target="50000" data-suffix="+">0</span>
-        <div class="stat-lbl">Jobs Completed</div>
+        <div class="text-xl font-bold text-gray-900">50,000+</div>
+        <div class="text-gray-500 text-sm">Jobs Completed</div>
       </div>
       <div class="bg-white rounded-2xl p-4 shadow-sm fade-up">
-        <span class="stat-num" data-target="4.8" data-suffix="★" data-decimal="1">0</span>
-        <div class="stat-lbl">Average Rating</div>
+        <div class="text-xl font-bold text-gray-900">4.8★</div>
+        <div class="text-gray-500 text-sm">Average Rating</div>
       </div>
       <div class="bg-white rounded-2xl p-4 shadow-sm fade-up">
-        <span class="stat-num" data-target="25" data-suffix="+">0</span>
-        <div class="stat-lbl">Cities Covered</div>
+        <div class="text-xl font-bold text-gray-900">25+</div>
+        <div class="text-gray-500 text-sm">Cities Covered</div>
       </div>
     </div>
   </section>
 
-  <!-- ===== How It Works ===== -->
-  <section class="hiw-section">
-    <div style="max-width:960px;margin:0 auto;text-align:center;">
-      <p style="color:#7c3aed;font-weight:600;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;">Simple Process</p>
-      <h2 style="font-size:2rem;font-weight:800;color:#111827;margin:8px 0 0;">How It Works</h2>
-      <p style="color:#6b7280;margin-top:8px;font-size:0.95rem;">Find and hire a skilled professional in 3 easy steps</p>
-    </div>
-    <div class="hiw-grid">
-      <div class="hiw-card">
-        <div class="hiw-icon" style="background:#ede9fe;"><span>🔍</span></div>
-        <span class="hiw-num">1</span>
-        <div class="hiw-connector"></div>
-        <div class="hiw-title">Search a Service</div>
-        <div class="hiw-desc">Pick your worker type and location — available 24/7.</div>
-      </div>
-      <div class="hiw-card">
-        <div class="hiw-icon" style="background:#fef3c7;"><span>📞</span></div>
-        <span class="hiw-num">2</span>
-        <div class="hiw-connector"></div>
-        <div class="hiw-title">Book Instantly</div>
-        <div class="hiw-desc">Connect with verified professionals and confirm your booking in seconds.</div>
-      </div>
-      <div class="hiw-card">
-        <div class="hiw-icon" style="background:#dcfce7;"><span>✅</span></div>
-        <span class="hiw-num">3</span>
-        <div class="hiw-title">Job Done!</div>
-        <div class="hiw-desc">Sit back and relax. Experts arrive on time and deliver perfect results.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== EXPLORE CATEGORIES CAROUSEL ===== -->
-  <section class="categories-section fade-up">
-    <div style="max-width:1200px;margin:0 auto;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;padding-right:24px;">
-        <div>
-          <h2 style="font-size:2rem;font-weight:800;color:#111827;margin-bottom:6px;">Explore Categories</h2>
-          <p style="color:#6b7280;font-size:0.95rem;">Expert help for every part of your life</p>
-        </div>
-        <a href="/frontend/category.html" style="color:#7c3aed;font-weight:600;font-size:0.95rem;display:flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap;">
-          View all services <span style="font-size:1.1em;">→</span>
-        </a>
-      </div>
-
-      <!-- Carousel wrapper -->
-      <div class="cat-carousel-wrapper">
-        <!-- Left arrow -->
-        <button class="cat-arrow cat-arrow-left" id="catPrev" aria-label="Scroll left">&#8592;</button>
-
-        <!-- Scrollable track -->
-        <div class="categories-track" id="catTrack">
-
-          <!-- Home Cleaning -->
-          <a href="/frontend/category.html" class="cat-card">
-            <img src="/images/cleaner.png" alt="Home Cleaning" loading="lazy">
-            <div class="cat-overlay">
-              <span class="cat-badge">🏠 Home Services</span>
-              <div class="cat-title">Home Cleaning</div>
-              <div class="cat-sub">2,400+ Professionals available</div>
-            </div>
-          </a>
-
-          <!-- Electrician -->
-          <a href="/frontend/category.html" class="cat-card">
-            <img src="/images/img/electrician.png" alt="Electrician" loading="lazy">
-            <div class="cat-overlay">
-              <span class="cat-badge">⚡ Electrical</span>
-              <div class="cat-title">Electrician</div>
-              <div class="cat-sub">1,200+ Pros</div>
-            </div>
-          </a>
-
-          <!-- Plumber -->
-          <a href="/frontend/category.html" class="cat-card">
-            <img src="/images/plumber.png" alt="Plumber" loading="lazy">
-            <div class="cat-overlay">
-              <span class="cat-badge">🔧 Plumbing</span>
-              <div class="cat-title">Plumber</div>
-              <div class="cat-sub">980+ Experts</div>
-            </div>
-          </a>
-
-          <!-- Carpenter -->
-          <a href="/frontend/category.html" class="cat-card">
-            <img src="/images/carpanter.png" alt="Carpenter" loading="lazy">
-            <div class="cat-overlay">
-              <span class="cat-badge">🪵 Carpentry</span>
-              <div class="cat-title">Carpenter</div>
-              <div class="cat-sub">650+ Skilled Workers</div>
-            </div>
-          </a>
-
-          <!-- Cook -->
-          <a href="/frontend/category.html" class="cat-card">
-            <img src="/images/img/cook.png" alt="Cook" loading="lazy">
-            <div class="cat-overlay">
-              <span class="cat-badge">🍳 Culinary</span>
-              <div class="cat-title">Cook / Chef</div>
-              <div class="cat-sub">500+ Home Cooks</div>
-            </div>
-          </a>
-
-          <!-- Driver -->
-          <a href="/frontend/category.html" class="cat-card">
-            <img src="/images/driver.png" alt="Driver" loading="lazy">
-            <div class="cat-overlay">
-              <span class="cat-badge">🚗 Transport</span>
-              <div class="cat-title">Driver</div>
-              <div class="cat-sub">300+ Verified Drivers</div>
-            </div>
-          </a>
-
-          <!-- Maid -->
-          <a href="/frontend/category.html" class="cat-card">
-            <img src="/images/maid.png" alt="Maid" loading="lazy">
-            <div class="cat-overlay">
-              <span class="cat-badge">🧹 Housekeeping</span>
-              <div class="cat-title">Maid</div>
-              <div class="cat-sub">800+ Helpers available</div>
-            </div>
-          </a>
-
-          <!-- Painter -->
-          <a href="/frontend/category.html" class="cat-card">
-            <img src="/images/painter.png" alt="Painter" loading="lazy">
-            <div class="cat-overlay">
-              <span class="cat-badge">🎨 Painting</span>
-              <div class="cat-title">Painter</div>
-              <div class="cat-sub">420+ Painters</div>
-            </div>
-          </a>
-
-          <!-- Labour -->
-          <a href="/frontend/category.html" class="cat-card">
-            <img src="/images/" alt="Labour" loading="lazy">
-            <div class="cat-overlay">
-              <span class="cat-badge">💪 Labour</span>
-              <div class="cat-title">Labour / Helper</div>
-              <div class="cat-sub">1,500+ Workers</div>
-            </div>
-          </a>
-
-        </div><!-- /track -->
-
-        <!-- Right arrow -->
-        <button class="cat-arrow cat-arrow-right" id="catNext" aria-label="Scroll right">&#8594;</button>
-      </div><!-- /wrapper -->
-      <!-- Dot Indicators -->
-      <div class="cat-dots" id="catDots"></div>
-    </div>
-  </section>
-
-  <!-- ===== Testimonials ===== -->
-  <section class="testi-section">
-    <div style="max-width:1100px;margin:0 auto;text-align:center;">
-      <p style="color:#7c3aed;font-weight:600;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;">What People Say</p>
-      <h2 style="font-size:2rem;font-weight:800;color:#111827;margin:8px 0 0;">Customer Reviews</h2>
-      <p style="color:#6b7280;margin-top:8px;font-size:0.95rem;">Trusted by thousands across India</p>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"The electrician arrived within an hour and fixed everything perfectly. SkilledBoys saved my day!"</p>
-        <div class="testi-author">
-          <div class="testi-avatar">R</div>
-          <div><div class="testi-name">Rohit Sharma</div><div class="testi-role">Customer · Delhi</div></div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Found a great cook through SkilledBoys. She's been working with us for 3 months. So easy!"</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#fcd34d);">P</div>
-          <div><div class="testi-name">Priya Mehta</div><div class="testi-role">Customer · Noida</div></div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★☆</div>
-        <p class="testi-text">"Got a plumber for an emergency midnight leak. Free to connect — total game-changer!"</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#10b981,#6ee7b7);">A</div>
-          <div><div class="testi-name">Amit Gupta</div><div class="testi-role">Customer · Gurgaon</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    /* ---- Animated Stats ---- */
-    (function(){
-      const counters = document.querySelectorAll('.stat-num');
-      let started = false;
-      function run(){
-        counters.forEach(el=>{
-          const target=parseFloat(el.dataset.target), suffix=el.dataset.suffix||'', dec=parseInt(el.dataset.decimal||'0');
-          const inc=target/112; let cur=0;
-          const t=setInterval(()=>{ cur+=inc; if(cur>=target){cur=target;clearInterval(t);}
-            el.textContent=dec?cur.toFixed(dec)+suffix:Math.floor(cur).toLocaleString()+suffix; },16);
-        });
-      }
-      new IntersectionObserver(e=>{if(e[0].isIntersecting&&!started){started=true;run();}},{threshold:0.3})
-        .observe(document.getElementById('statsSection'));
-    })();
-
-    /* ---- Carousel + Dots ---- */
-    (function(){
-      const track=document.getElementById('catTrack'),prev=document.getElementById('catPrev'),
-            next=document.getElementById('catNext'),dotsEl=document.getElementById('catDots');
-      const cards=track.querySelectorAll('.cat-card'), step=320;
-      const vis=()=>Math.max(1,Math.round(track.clientWidth/(320+20)));
-      const total=()=>Math.ceil(cards.length/vis());
-      function buildDots(){
-        dotsEl.innerHTML='';
-        for(let i=0;i<total();i++){
-          const d=document.createElement('button'); d.className='cat-dot'+(i===0?' active':'');
-          d.setAttribute('aria-label','Slide '+(i+1));
-          d.addEventListener('click',()=>track.scrollTo({left:i*step*vis(),behavior:'smooth'}));
-          dotsEl.appendChild(d);
-        }
-      }
-      buildDots(); window.addEventListener('resize',buildDots);
-      function updateDots(){
-        const dots=dotsEl.querySelectorAll('.cat-dot'),idx=Math.round(track.scrollLeft/(step*vis()));
-        dots.forEach((d,i)=>d.classList.toggle('active',i===idx));
-      }
-      next.addEventListener('click',()=>track.scrollBy({left:step,behavior:'smooth'}));
-      prev.addEventListener('click',()=>track.scrollBy({left:-step,behavior:'smooth'}));
-      let drag=false,sx=0,ss=0;
-      track.addEventListener('mousedown',e=>{drag=true;sx=e.pageX;ss=track.scrollLeft;track.classList.add('dragging');});
-      window.addEventListener('mousemove',e=>{if(!drag)return;track.scrollLeft=ss-(e.pageX-sx);});
-      window.addEventListener('mouseup',()=>{drag=false;track.classList.remove('dragging');});
-      function arrows(){prev.style.opacity=track.scrollLeft>10?'1':'0.35';next.style.opacity=track.scrollLeft<track.scrollWidth-track.clientWidth-10?'1':'0.35';}
-      track.addEventListener('scroll',()=>{arrows();updateDots();}); arrows();
-    })();
-  </script>
-
-  <!-- ===== Full Footer ===== -->
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <img src="../img/skilledboyslogo1.png" alt="Logo" style="height:40px;width:auto;filter:brightness(2);">
-          <span style="font-size:1.3rem;font-weight:800;color:#f9fafb;"><span style="color:#a78bfa;">Skilled</span>Boys</span>
-        </div>
-        <p>Connecting you with trusted skilled professionals across India — for free.</p>
-        <div class="footer-socials">
-          <a href="https://www.instagram.com/skilledboyss?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="footer-social-btn" style="background:#e1306c;color:#fff;"><i class="fas fa-instagram"></i></a>
-          <a href="https://wa.me/8176033198" target="_blank" class="footer-social-btn" style="background:#25d366;color:#fff;"><i class="fas fa-whatsapp"></i></a>
-          <a href="https://portfolio-abhishek-nu.vercel.app" target="_blank" class="footer-social-btn" style="background:#1877f2;color:#fff;"><i class="fas fa-facebook-f"></i></a>
-          <a href="" target="_blank" class="footer-social-btn" style="background:#ff0000;color:#fff;"><i class="fas fa-youtube"></i></a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="landing.html">Home</a></li>
-          <li><a href="/frontend/category.html">Find Workers</a></li>
-          <li><a href="/frontend/area.html">Available Cities</a></li>
-          <li><a href="/frontend/about.html">About Us</a></li>
-          <li><a href="/frontend/contact.html">Support</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Worker Types</h4>
-        <ul>
-          <li><a href="/frontend/category.html">Electrician</a></li>
-          <li><a href="/frontend/category.html">Plumber</a></li>
-          <li><a href="/frontend/category.html">Carpenter</a></li>
-          <li><a href="/frontend/category.html">Cook / Chef</a></li>
-          <li><a href="/frontend/category.html">Driver</a></li>
-          <li><a href="/frontend/category.html">Home Cleaner</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">© 2025 SkilledBoys — Bridging Customers &amp; Workers with Trust. Made with ❤️ in India.</div>
+  <!-- FOOTER -->
+  <footer class="py-8 text-center text-gray-500">
+    © 2025 SkilledBoys — Bridging Customers & Workers with Trust.
   </footer>
-
-  <!-- Floating WhatsApp -->
-  <a href="https://wa.me/8176033198" target="_blank" class="wa-fab" aria-label="WhatsApp">
-    <img src="../img/watsapp.png" alt="WhatsApp">
-  </a>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
   <script>
@@ -634,7 +187,7 @@
 
     // Role logic
     const CUSTOMER_URL = "landing.html";
-    const WORKER_URL = "/frontend/fworker-register.html";
+    const WORKER_URL = "worker-register.html";
     function go(role) {
       setTimeout(() => {
         window.location.href = role === "worker" ? WORKER_URL : CUSTOMER_URL;
