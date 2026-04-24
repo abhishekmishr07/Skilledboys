@@ -552,7 +552,7 @@
     const category = document.getElementById("category").value;
     const location = document.getElementById("location").value;
     if (!category || !location) { alert("Please select both category and location"); return; }
-    window.location.href = `/frontend/results.html?category=${encodeURIComponent(category)}&location=${encodeURIComponent(location)}`;
+    window.location.href = `results.html?category=${encodeURIComponent(category)}&location=${encodeURIComponent(location)}`;
   }
 
   // Mobile Menu Toggle
