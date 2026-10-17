@@ -59,7 +59,7 @@ cd backend
 npm install
 ```
 
-Copy `backend/.env.example` to `backend/.env` and set your own values. Never commit `.env`:
+Copy `.env.example` to `.env` from inside the `backend/` directory, then set your own values. Never commit `.env`:
 
 ```env
 PORT=5000
