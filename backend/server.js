@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const path = require("path");
 
 const app = express();
 app.use(cors());
@@ -12,16 +11,22 @@ app.use(express.json());
 
 //app.use(express.static(path.join(__dirname, "../frontend")));
 
-const JWT_SECRET = process.env.JWT_SECRET || "skilledboys_secret";
+const MONGO_URI = process.env.MONGO_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!MONGO_URI || !JWT_SECRET) {
+  console.error("Startup failed: set MONGO_URI and JWT_SECRET in the environment.");
+  process.exit(1);
+}
 
 // MongoDB Connect
 mongoose
-  .connect(
-    process.env.MONGO_URI ||
-      "mongodb+srv://abhishekmishraadev_db_user:Abhishek%402003@abhishekdb.idmxnex.mongodb.net/SkilledBoys"
-  )
-  .then(() => console.log("✅ MongoDB Atlas connected successfully"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err.message));
+  .connect(MONGO_URI)
+  .then(() => console.log("✅ MongoDB connected successfully"))
+  .catch((err) => {
+    console.error("❌ MongoDB connection error:", err.message);
+    process.exit(1);
+  });
 
 // Worker Schema
 const workerSchema = new mongoose.Schema({
@@ -172,11 +177,13 @@ app.get("/api/workers", async (req, res) => {
 });
 
 // Toggle Worker Status
-app.put("/api/workers/status/:id", async (req, res) => {
+app.put("/api/workers/status/:id", authMiddleware, async (req, res) => {
   try {
     const worker = await Worker.findById(req.params.id);
     if (!worker)
       return res.status(404).json({ success: false, message: "Worker not found" });
+    if (String(worker._id) !== String(req.user.id))
+      return res.status(403).json({ success: false, message: "You can only update your own status" });
 
     worker.status = worker.status === "working" ? "not working" : "working";
     await worker.save();
@@ -189,13 +196,38 @@ app.put("/api/workers/status/:id", async (req, res) => {
 });
 
 // Update Worker Profile
-app.put("/api/workers/:id", async (req, res) => {
+app.put("/api/workers/:id", authMiddleware, async (req, res) => {
   try {
-    const updated = await Worker.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (String(req.params.id) !== String(req.user.id))
+      return res.status(403).json({ success: false, message: "You can only update your own profile" });
+
+    const allowedFields = [
+      "name", "category", "location", "experience", "gender",
+      "startTime", "endTime", "age", "phone", "photo",
+    ];
+    const updates = {};
+    for (const field of allowedFields) {
+      if (Object.prototype.hasOwnProperty.call(req.body, field)) {
+        updates[field] = req.body[field];
+      }
+    }
+
+    if (Object.keys(updates).length === 0)
+      return res.status(400).json({ success: false, message: "No valid profile fields provided" });
+
+    const updated = await Worker.findByIdAndUpdate(
+      req.params.id,
+      { $set: updates },
+      { new: true, runValidators: true }
+    ).select("-password");
+
+    if (!updated)
+      return res.status(404).json({ success: false, message: "Worker not found" });
+
     res.json({ success: true, worker: updated });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success: false, message: "Error updating profile" });
+    res.status(400).json({ success: false, message: "Error updating profile" });
   }
 });
 
