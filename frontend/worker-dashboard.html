@@ -50,19 +50,21 @@ if (!token || !workerId) {
   }
 
   statusBtn.addEventListener("click", async () => {
-    isWorking = !isWorking;
-    updateStatusBtn();
+    statusBtn.disabled = true;
     try {
-      await fetch(`https://skilledboys-backend-u54y.onrender.com/api/workers/status`, {
+      const res = await fetch(`https://skilledboys-backend-u54y.onrender.com/api/workers/status/${encodeURIComponent(workerId)}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({ status: isWorking ? "working" : "not working" })
+        headers: { "Authorization": `Bearer ${token}` }
       });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message || "Unable to update status");
+      isWorking = data.status === "working";
+      updateStatusBtn();
     } catch (err) {
       console.error("Error updating status:", err);
+      alert(err.message || "Error updating status");
+    } finally {
+      statusBtn.disabled = false;
     }
   });
 
