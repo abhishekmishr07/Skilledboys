@@ -59,7 +59,7 @@ cd backend
 npm install
 ```
 
-Create a `.env` file inside `backend/` (never commit it):
+Copy `backend/.env.example` to `backend/.env` and set your own values. Never commit `.env`:
 
 ```env
 PORT=5000
@@ -91,7 +91,7 @@ Open `frontend/index.html` using a local static server or your editor's Live Ser
 | POST | `/api/workers/login` | Authenticate a worker | Public |
 | GET | `/api/workers` | Search workers by category/location | Public |
 | GET | `/api/workers/profile` | Get the signed-in worker's profile | JWT required |
-| PUT | `/api/workers/status` | Update own availability | JWT required |
+| PUT | `/api/workers/status/:id` | Toggle own availability | JWT required; own profile only |
 | PUT | `/api/workers/:id` | Update allowed profile fields | JWT required; own profile only |
 
 Send the JWT in the request header as `Authorization: Bearer <token>`.
