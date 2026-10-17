@@ -2,6 +2,9 @@
 
 SkilledBoys is a full-stack web application concept for discovering local service professionals and helping workers create an online profile. The repository contains a static HTML/CSS/JavaScript frontend and a Node.js/Express API backed by MongoDB.
 
+**Live website:** https://www.skilledboys.com
+
+
 ## Project highlights
 
 - Browse service categories and locations.
