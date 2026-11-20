@@ -96,7 +96,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Gardener",
     badge: "🌿 Gardening",
     count: "250+ Gardeners",
-    image: "https://images.unsplash.com/photo-1599685315640-9ceab2f58944?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=800&q=80",
     description: "Balcony garden landscaping, plant repotting, lawn care, tree pruning.",
   },
   {
