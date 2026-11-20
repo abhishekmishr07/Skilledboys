@@ -129,16 +129,16 @@ export function Navbar() {
         {/* Mobile menu button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2.5 rounded-xl text-gray-700 hover:bg-gray-100 transition focus:outline-none"
-          aria-label="Toggle menu"
+          className="inline-flex md:hidden items-center justify-center p-2.5 rounded-xl border border-gray-200 text-gray-700 hover:text-brand-600 hover:bg-purple-50 transition focus:outline-none focus:ring-2 focus:ring-brand-500 active:scale-95"
+          aria-label="Toggle navigation menu"
         >
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {mobileMenuOpen ? <X className="h-6 w-6 text-brand-600" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-100 bg-white/98 backdrop-blur-lg px-4 pt-3 pb-6 space-y-2 shadow-2xl animate-in slide-in-from-top-4 duration-200">
+        <div className="md:hidden border-t border-gray-100 bg-white/98 backdrop-blur-xl px-4 pt-3 pb-8 space-y-2 shadow-2xl relative z-50 animate-in slide-in-from-top-4 duration-200">
           <div className="space-y-1">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;

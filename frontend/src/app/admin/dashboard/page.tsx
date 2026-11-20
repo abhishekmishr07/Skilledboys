@@ -121,7 +121,7 @@ export default function AdminDashboardPage() {
 
   // Toggle worker status
   const handleToggleStatus = async (worker: Worker) => {
-    const id = worker._id || worker.id || "";
+    const id = String(worker._id || worker.id || "");
     const nextStatus = worker.status === "working" ? "not working" : "working";
     try {
       const res = await api.adminUpdateWorker(id, { status: nextStatus });

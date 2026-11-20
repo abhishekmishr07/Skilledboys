@@ -2,8 +2,9 @@ export interface Worker {
   _id: string;
   id?: string;
   name: string;
-  number: string;
+  number?: string;
   phone?: string;
+  contact?: string;
   category: string;
   location: string;
   experience: number;

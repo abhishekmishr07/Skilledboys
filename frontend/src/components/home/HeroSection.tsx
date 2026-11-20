@@ -194,30 +194,47 @@ export function HeroSection() {
             className="lg:col-span-5 flex justify-center"
           >
             <div className="relative w-full max-w-md sm:max-w-lg">
-              <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-purple-100 bg-white">
+              <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-purple-100 bg-white h-[380px] sm:h-[440px]">
                 <Image
-                  src="/images/logoskilled.png"
-                  alt="SkilledBoys connecting customers with local professionals"
-                  width={600}
-                  height={500}
+                  src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1000&q=80"
+                  alt="Verified Skilled Professional at work in Delhi NCR"
+                  fill
+                  unoptimized
                   priority
-                  className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
+                  className="object-cover transform hover:scale-105 transition-transform duration-700"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-transparent to-black/20" />
+
+                {/* Sub-card overlay at bottom of hero photo */}
+                <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-lg border border-white/60">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-xs font-bold text-gray-900 flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Verified Local Experts
+                      </div>
+                      <div className="text-[11px] text-gray-500 mt-0.5">Electricians, Plumbers, Cooks in Delhi NCR</div>
+                    </div>
+                    <span className="text-xs font-extrabold text-brand-700 bg-purple-100 px-2.5 py-1 rounded-xl">
+                      0% Commission
+                    </span>
+                  </div>
+                </div>
               </div>
 
               {/* Floating Verified Badge */}
-              <div className="absolute -bottom-5 -left-5 z-20 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-purple-100 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+              <div className="absolute -bottom-4 -left-3 sm:-left-5 z-20 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-purple-100 flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">
                   ✓
                 </div>
                 <div>
                   <div className="text-xs font-bold text-gray-900">Direct Phone Calling</div>
-                  <div className="text-[11px] text-gray-500">Instant connection, 0 middleman</div>
+                  <div className="text-[10px] text-gray-500">Call directly, no middleman</div>
                 </div>
               </div>
 
               {/* Floating Star Badge */}
-              <div className="absolute -top-4 -right-4 z-20 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-xl border border-purple-100 flex items-center gap-2">
+              <div className="absolute -top-3.5 -right-3 sm:-right-4 z-20 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-xl border border-purple-100 flex items-center gap-1.5">
                 <span className="text-amber-500 font-black text-sm">★ 4.8 / 5.0</span>
                 <span className="text-xs text-gray-600 font-medium">Top Rated</span>
               </div>

@@ -237,7 +237,7 @@ export const TESTIMONIALS = [
     initial: "P",
     rating: 5,
     text: "Needed deep cleaning before a family griha pravesh. Connected on WhatsApp with Sunita in minutes. Clear ₹1,800 estimate with zero surprise add-ons. Punctual, honest, and spotless results.",
-    avatarBg: "from-purple-600 to-indigo-600",
+    avatarBg: "from-purple-700 to-indigo-700",
   },
   {
     id: 2,
@@ -246,7 +246,7 @@ export const TESTIMONIALS = [
     initial: "V",
     rating: 5,
     text: "Our inverter trip switch melted during a heatwave. Other apps asked for a ₹499 inspection fee just to visit next day. On SkilledBoys I called Rajesh electrician directly and he arrived in 35 minutes.",
-    avatarBg: "from-amber-500 to-yellow-400",
+    avatarBg: "from-amber-700 to-orange-700",
   },
   {
     id: 3,
@@ -255,7 +255,7 @@ export const TESTIMONIALS = [
     initial: "D",
     rating: 5,
     text: "Had an urgent kitchen angle-valve leak flooding under the sink. The plumber answered on the second ring, quoted a fair rate upfront, and fixed it within an hour. The 0% commission direct-call model is genuinely useful.",
-    avatarBg: "from-emerald-500 to-teal-400",
+    avatarBg: "from-emerald-700 to-teal-800",
   },
   {
     id: 4,
@@ -264,7 +264,7 @@ export const TESTIMONIALS = [
     initial: "M",
     rating: 5,
     text: "I used to lose 25% of my hard-earned money to service aggregator commissions. On SkilledBoys, customers call my phone directly. I get 3 to 4 honest repair jobs every week and keep 100% of my payment.",
-    avatarBg: "from-blue-600 to-cyan-500",
+    avatarBg: "from-blue-700 to-indigo-800",
   },
 ];
 

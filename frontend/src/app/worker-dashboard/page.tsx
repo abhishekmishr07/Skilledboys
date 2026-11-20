@@ -123,7 +123,7 @@ export default function WorkerDashboardPage() {
     if (!worker) return;
     setStatusLoading(true);
     try {
-      const id = worker._id || worker.id || "";
+      const id = String(worker._id || worker.id || "");
       const res = await api.toggleWorkerStatus(id);
       if (res.success) {
         setWorker((prev) => (prev ? { ...prev, status: res.status } : null));
@@ -148,7 +148,7 @@ export default function WorkerDashboardPage() {
 
     setSavingEdit(true);
     try {
-      const id = worker._id || worker.id || "";
+      const id = String(worker._id || worker.id || "");
       const res = await api.updateWorkerProfile(id, editFormData);
       if (res.success) {
         setWorker(res.worker);

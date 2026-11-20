@@ -70,10 +70,10 @@ export function Footer() {
                 <Phone className="h-5 w-5" />
               </a>
               <a
-                href="https://portfolio-abhishek-nu.vercel.app"
+                href="https://www.linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Facebook"
+                aria-label="LinkedIn"
                 className="w-10 h-10 rounded-full bg-blue-600/20 text-blue-400 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all transform hover:-translate-y-1"
               >
                 <Facebook className="h-5 w-5" />
@@ -195,7 +195,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-gray-900 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
-          <p>© 2025 SkilledBoys — Bridging Customers &amp; Workers with Trust.</p>
+          <p>© {new Date().getFullYear()} SkilledBoys — India&apos;s Transparent Local Services Network.</p>
           <p className="flex items-center gap-1.5">
             Made with <Heart className="h-3.5 w-3.5 text-red-500 fill-red-500" /> in India.
           </p>

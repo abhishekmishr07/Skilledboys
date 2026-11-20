@@ -10,7 +10,7 @@ export function FloatingWhatsApp() {
       target="_blank"
       rel="noreferrer"
       aria-label="Chat with SkilledBoys on WhatsApp"
-      className="fixed bottom-6 right-6 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-[#25d366] text-white shadow-xl shadow-emerald-500/30 hover:scale-110 active:scale-95 transition-all duration-300 group"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25d366] text-white shadow-xl shadow-emerald-500/30 hover:scale-110 active:scale-95 transition-all duration-300 group"
     >
       <div className="relative w-8 h-8 flex items-center justify-center">
         <Image

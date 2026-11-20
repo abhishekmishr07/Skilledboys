@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { api } from "@/services/api";
 import { Worker } from "@/types";
 import { WorkerCard } from "@/components/workers/WorkerCard";
 import { WorkerCardSkeleton } from "@/components/common/LoadingSpinner";
-import { Search, MapPin, Wrench, RotateCcw, AlertCircle, Sparkles } from "lucide-react";
+import { Search, MapPin, Wrench, RotateCcw, AlertCircle, Sparkles, Filter } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 const POPULAR_CATEGORIES = [
@@ -17,28 +17,36 @@ const POPULAR_CATEGORIES = [
   "Painter",
   "Driver",
   "Maid",
+  "Labour",
+  "Gardener",
 ];
 
-const POPULAR_CITIES = ["Noida", "Delhi", "Greater Noida", "Gurgaon", "Ghaziabad", "Mumbai"];
+const POPULAR_CITIES = [
+  "Noida",
+  "Delhi",
+  "Greater Noida",
+  "Gurgaon",
+  "Ghaziabad",
+  "Mumbai",
+  "Bengaluru",
+  "Lucknow",
+];
 
 export default function FindWorkersPage() {
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [workers, setWorkers] = useState<Worker[]>([]);
+  const [allWorkers, setAllWorkers] = useState<Worker[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchWorkers = useCallback(async () => {
+  // Initial load: Fetch all workers once and cache in memory for 0ms client-side filtering
+  const loadWorkers = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await api.getWorkers({
-        category: category || undefined,
-        location: location || undefined,
-        search: searchQuery || undefined,
-      });
-      setWorkers(data || []);
+      const data = await api.getWorkers();
+      setAllWorkers(data || []);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
@@ -48,11 +56,45 @@ export default function FindWorkersPage() {
     } finally {
       setLoading(false);
     }
-  }, [category, location, searchQuery]);
+  }, []);
 
   useEffect(() => {
-    fetchWorkers();
-  }, [fetchWorkers]);
+    loadWorkers();
+  }, [loadWorkers]);
+
+  // Instant reactive client-side filter
+  const filteredWorkers = useMemo(() => {
+    return allWorkers.filter((w) => {
+      if (category) {
+        const catLower = category.toLowerCase();
+        const wCatLower = (w.category || "").toLowerCase();
+        if (catLower === "cleaner") {
+          if (!wCatLower.includes("clean") && !wCatLower.includes("maid")) return false;
+        } else if (catLower === "cook") {
+          if (!wCatLower.includes("cook") && !wCatLower.includes("chef")) return false;
+        } else if (!wCatLower.includes(catLower)) {
+          return false;
+        }
+      }
+
+      if (location) {
+        const locLower = location.toLowerCase();
+        const wLocLower = (w.location || "").toLowerCase();
+        if (!wLocLower.includes(locLower)) return false;
+      }
+
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase().trim();
+        const matchesName = (w.name || "").toLowerCase().includes(q);
+        const matchesCategory = (w.category || "").toLowerCase().includes(q);
+        const matchesLocation = (w.location || "").toLowerCase().includes(q);
+        const matchesBio = (w.bio || "").toLowerCase().includes(q);
+        if (!matchesName && !matchesCategory && !matchesLocation && !matchesBio) return false;
+      }
+
+      return true;
+    });
+  }, [allWorkers, category, location, searchQuery]);
 
   const handleReset = () => {
     setCategory("");
@@ -74,7 +116,7 @@ export default function FindWorkersPage() {
             Find Trusted Local Workers
           </h1>
           <p className="text-gray-500 text-base mt-2">
-            Select your category and location to connect directly with available service professionals.
+            Select your skill category and location to connect directly with available service professionals.
           </p>
         </div>
 
@@ -87,7 +129,7 @@ export default function FindWorkersPage() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search by worker name, keyword..."
+                placeholder="Search by worker name, skill, area..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full h-12 pl-12 pr-4 bg-gray-50 rounded-2xl border border-gray-200 focus:border-brand-500 focus:bg-white text-sm outline-none transition"
@@ -110,8 +152,8 @@ export default function FindWorkersPage() {
                 <option value="Cleaner">Home Cleaner</option>
                 <option value="Painter">Painter</option>
                 <option value="Driver">Driver</option>
-                <option value="Maid">Maid</option>
-                <option value="Labour">Labour</option>
+                <option value="Maid">Maid / Housekeeper</option>
+                <option value="Labour">Labour / Helper</option>
                 <option value="Gardener">Gardener</option>
                 <option value="Yoga Instructor">Yoga Instructor</option>
               </select>
@@ -142,7 +184,9 @@ export default function FindWorkersPage() {
 
           {/* Quick Category Chips */}
           <div className="mt-5 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-bold text-gray-400 mr-1">Popular Services:</span>
+            <span className="text-xs font-bold text-gray-400 mr-1 flex items-center gap-1">
+              <Filter className="h-3 w-3" /> Quick Filter:
+            </span>
             {POPULAR_CATEGORIES.map((cat) => (
               <button
                 key={cat}
@@ -165,7 +209,7 @@ export default function FindWorkersPage() {
                 className="ml-auto inline-flex items-center gap-1 text-xs font-bold text-brand-600 hover:text-brand-700"
               >
                 <RotateCcw className="h-3 w-3" />
-                <span>Reset</span>
+                <span>Reset ({filteredWorkers.length})</span>
               </button>
             )}
           </div>
@@ -177,7 +221,7 @@ export default function FindWorkersPage() {
             {category || "All"} Professionals {location ? `in ${location}` : ""}
           </h2>
           <span className="text-xs font-semibold px-3 py-1 rounded-full bg-purple-100 text-brand-700">
-            {loading ? "Searching..." : `${workers.length} found`}
+            {loading ? "Searching..." : `${filteredWorkers.length} verified found`}
           </span>
         </div>
 
@@ -193,11 +237,11 @@ export default function FindWorkersPage() {
             <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
             <h3 className="text-lg font-bold text-gray-900 mb-1">Failed to Connect to Server</h3>
             <p className="text-sm text-gray-500 mb-6">{error}</p>
-            <Button onClick={fetchWorkers} variant="primary">
+            <Button onClick={loadWorkers} variant="primary">
               Retry Connection
             </Button>
           </div>
-        ) : workers.length === 0 ? (
+        ) : filteredWorkers.length === 0 ? (
           <div className="bg-white rounded-3xl p-12 text-center border border-gray-100 shadow-soft max-w-lg mx-auto">
             <div className="w-16 h-16 rounded-full bg-purple-50 text-brand-600 flex items-center justify-center text-2xl mx-auto mb-4">
               🔍
@@ -212,8 +256,8 @@ export default function FindWorkersPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {workers.map((worker) => (
-              <WorkerCard key={worker._id || worker.id} worker={worker} />
+            {filteredWorkers.map((worker) => (
+              <WorkerCard key={worker._id || String(worker.id)} worker={worker} />
             ))}
           </div>
         )}

@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { StatsSection } from "@/components/home/StatsSection";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { CategoryCarousel } from "@/components/home/CategoryCarousel";
+import { RateCardSection } from "@/components/home/RateCardSection";
 import { Testimonials } from "@/components/home/Testimonials";
 import {
   ArrowRight,
@@ -129,6 +130,9 @@ export default function HomePage() {
 
       {/* Category Carousel Section */}
       <CategoryCarousel />
+
+      {/* Indicative Rate Benchmark Section */}
+      <RateCardSection />
 
       {/* Value Proposition Highlights */}
       <section className="py-20 bg-gradient-to-br from-brand-900 via-purple-950 to-gray-950 text-white relative overflow-hidden">

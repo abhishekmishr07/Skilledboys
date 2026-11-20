@@ -91,9 +91,10 @@ export const api = {
     return request<Worker[]>(endpoint);
   },
 
-  async getWorkerById(id: string): Promise<Worker> {
+  async getWorkerById(id: string | number): Promise<Worker> {
     const workers = await this.getWorkers();
-    const found = workers.find((w) => w._id === id || w.id === id);
+    const idStr = String(id);
+    const found = workers.find((w) => w._id === idStr || String(w.id) === idStr);
     if (!found) {
       throw new Error("Worker profile not found");
     }
@@ -134,17 +135,17 @@ export const api = {
     });
   },
 
-  async toggleWorkerStatus(workerId: string): Promise<{ success: boolean; status: "working" | "not working" }> {
+  async toggleWorkerStatus(workerId: string | number): Promise<{ success: boolean; status: "working" | "not working" }> {
     const token = getWorkerToken();
-    return request(`/api/workers/status/${encodeURIComponent(workerId)}`, {
+    return request(`/api/workers/status/${encodeURIComponent(String(workerId))}`, {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` },
     });
   },
 
-  async updateWorkerProfile(workerId: string, data: Partial<Worker>): Promise<{ success: boolean; worker: Worker }> {
+  async updateWorkerProfile(workerId: string | number, data: Partial<Worker>): Promise<{ success: boolean; worker: Worker }> {
     const token = getWorkerToken();
-    return request(`/api/workers/${encodeURIComponent(workerId)}`, {
+    return request(`/api/workers/${encodeURIComponent(String(workerId))}`, {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` },
       body: JSON.stringify(data),
@@ -227,22 +228,22 @@ export const api = {
     });
   },
 
-  async adminUpdateWorker(id: string, data: Partial<Worker>): Promise<{
+  async adminUpdateWorker(id: string | number, data: Partial<Worker>): Promise<{
     success: boolean;
     message: string;
     worker: Worker;
   }> {
     const token = getAdminToken();
-    return request(`/api/admin/workers/${encodeURIComponent(id)}`, {
+    return request(`/api/admin/workers/${encodeURIComponent(String(id))}`, {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` },
       body: JSON.stringify(data),
     });
   },
 
-  async adminDeleteWorker(id: string): Promise<{ success: boolean; message: string }> {
+  async adminDeleteWorker(id: string | number): Promise<{ success: boolean; message: string }> {
     const token = getAdminToken();
-    return request(`/api/admin/workers/${encodeURIComponent(id)}`, {
+    return request(`/api/admin/workers/${encodeURIComponent(String(id))}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
