@@ -91,7 +91,7 @@ export function generateLocalBusinessSchema({
   name = "SkilledBoys Local Service Network",
   category = "Home Services",
   city = "Delhi NCR",
-  description = "Connect directly with verified local electricians, plumbers, cooks, carpenters, and technicians across Delhi NCR with zero commission fees.",
+  description = "Hire verified electricians, plumbers, carpenters, cooks & cleaners across Delhi NCR. Call or WhatsApp local technicians directly with 0% commission & fair rates.",
 }: {
   name?: string;
   category?: string;

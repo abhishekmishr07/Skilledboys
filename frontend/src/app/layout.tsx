@@ -16,11 +16,11 @@ import {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "SkilledBoys – Hire Local Electricians, Plumbers & Experts in Delhi NCR",
+    default: "SkilledBoys: Verified Home Services & Local Experts in Delhi NCR",
     template: "%s | SkilledBoys",
   },
   description:
-    "Connect directly with verified electricians, plumbers, carpenters, cleaners, cooks and painters in Noida, Greater Noida, Ghaziabad & Delhi NCR. 100% free direct connect with zero commission.",
+    "Hire verified electricians, plumbers, carpenters, cooks & cleaners across Delhi NCR. Call or WhatsApp local technicians directly with 0% commission & fair rates.",
   keywords: [
     "electrician near me",
     "plumber near me",
@@ -61,9 +61,9 @@ export const metadata: Metadata = {
     apple: "/images/skilledboyslogo1.png",
   },
   openGraph: {
-    title: "SkilledBoys – Connecting Local Experts in One Click",
+    title: "SkilledBoys: Verified Home Services & Local Experts in Delhi NCR",
     description:
-      "Find trusted electricians, plumbers, cleaners, carpenters, and everyday skilled professionals near you across Delhi NCR for free.",
+      "Hire verified electricians, plumbers, carpenters, cooks & cleaners across Delhi NCR. Call or WhatsApp local technicians directly with 0% commission & fair rates.",
     url: SITE_URL,
     siteName: SITE_NAME,
     locale: "en_IN",
@@ -73,15 +73,15 @@ export const metadata: Metadata = {
         url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "SkilledBoys - India's Transparent Local Worker Network",
+        alt: "SkilledBoys - Verified Home Services & Local Experts in Delhi NCR",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SkilledBoys – Connecting Local Experts in One Click",
+    title: "SkilledBoys: Verified Home Services & Local Experts in Delhi NCR",
     description:
-      "Directly hire verified electricians, plumbers, carpenters, cooks, and cleaners in Delhi NCR with zero commission fees.",
+      "Hire verified electricians, plumbers, carpenters, cooks & cleaners across Delhi NCR. Call or WhatsApp local technicians directly with 0% commission & fair rates.",
     images: [DEFAULT_OG_IMAGE],
     creator: "@skilledboys",
   },
