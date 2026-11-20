@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Search, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Search, Sparkles, ArrowRight, ArrowUpRight, Star } from "lucide-react";
 import { CATEGORIES } from "@/lib/constants";
 
 export default function CategoriesPage() {
@@ -40,7 +40,7 @@ export default function CategoriesPage() {
 
         {/* Live Search Bar */}
         <div className="max-w-xl mx-auto mb-12">
-          <div className="relative bg-white rounded-2xl shadow-md border border-purple-100">
+          <div className="relative bg-white rounded-2xl shadow-soft border border-purple-100/80">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input
               type="text"
@@ -70,35 +70,63 @@ export default function CategoriesPage() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filteredCategories.map((cat) => (
               <Link
                 key={cat.id}
                 href={`/results?category=${encodeURIComponent(cat.category)}`}
-                className="group bg-white rounded-3xl p-5 border border-gray-100/90 shadow-soft hover:shadow-card-hover hover:border-brand-400 hover:-translate-y-1.5 transition-all duration-300 text-center flex flex-col items-center justify-between"
+                className="group bg-white rounded-3xl overflow-hidden border border-gray-100/90 shadow-soft hover:shadow-card-hover hover:border-brand-300 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-3 rounded-2xl bg-purple-50 p-2 flex items-center justify-center group-hover:bg-purple-100 group-hover:scale-105 transition duration-300">
+                  {/* Photo Banner */}
+                  <div className="relative h-44 w-full overflow-hidden bg-gray-100">
                     <Image
                       src={cat.image}
                       alt={cat.name}
-                      width={80}
-                      height={80}
-                      className="object-contain"
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-106 transition-transform duration-500 ease-out"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950/60 via-transparent to-transparent" />
+                    
+                    <div className="absolute top-3 left-3">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-md text-[11px] font-bold text-gray-800 shadow-xs">
+                        {cat.badge}
+                      </span>
+                    </div>
+
+                    <div className="absolute top-3 right-3">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white text-[10px] font-bold">
+                        <Star className="h-2.5 w-2.5 text-amber-400 fill-amber-400" />
+                        <span>4.9</span>
+                      </span>
+                    </div>
+
+                    <div className="absolute bottom-2.5 left-3.5 right-3.5">
+                      <h3 className="font-black text-white text-lg tracking-tight drop-shadow-sm">
+                        {cat.name}
+                      </h3>
+                    </div>
                   </div>
 
-                  <h3 className="font-bold text-gray-900 text-sm sm:text-base group-hover:text-brand-600 transition">
-                    {cat.name}
-                  </h3>
-                  <p className="text-[11px] text-gray-400 font-medium mt-0.5">
-                    {cat.count}
-                  </p>
+                  {/* Body description */}
+                  <div className="p-4">
+                    <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
+                      {cat.description}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-gray-50 w-full flex items-center justify-center gap-1 text-[11px] font-bold text-brand-600 group-hover:text-brand-700">
-                  <span>Find Pros</span>
-                  <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
+                {/* Footer */}
+                <div className="px-4 pb-4 pt-2 border-t border-gray-50 flex items-center justify-between">
+                  <span className="text-xs font-bold text-emerald-600 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    {cat.count}
+                  </span>
+
+                  <span className="w-7 h-7 rounded-full bg-purple-50 text-brand-600 group-hover:bg-brand-600 group-hover:text-white transition-all duration-200 flex items-center justify-center">
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </span>
                 </div>
               </Link>
             ))}

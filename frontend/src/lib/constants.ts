@@ -15,7 +15,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Cleaner",
     badge: "🏠 Home Services",
     count: "2,400+ Pros",
-    image: "/images/cleaner.png",
+    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80",
     description: "Deep house cleaning, dusting, disinfection, kitchen & bathroom sanitization.",
   },
   {
@@ -24,7 +24,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Electrician",
     badge: "⚡ Electrical",
     count: "1,200+ Pros",
-    image: "/images/electrician.png",
+    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80",
     description: "Wiring, switchboards, appliance repair, MCB trips, inverter setup.",
   },
   {
@@ -33,7 +33,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Plumber",
     badge: "🔧 Plumbing",
     count: "980+ Experts",
-    image: "/images/plumber.png",
+    image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=80",
     description: "Pipe leakage, sanitary fitting, water tank repair, tap installations.",
   },
   {
@@ -42,7 +42,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Carpenter",
     badge: "🪵 Carpentry",
     count: "650+ Skilled",
-    image: "/images/carpanter.png",
+    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80",
     description: "Furniture repair, custom wood crafting, door locks, modular setups.",
   },
   {
@@ -51,7 +51,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Cook",
     badge: "🍳 Culinary",
     count: "500+ Cooks",
-    image: "/images/cook.png",
+    image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80",
     description: "Home-style breakfast, lunch, dinner, party catering & custom dietary menus.",
   },
   {
@@ -60,7 +60,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Driver",
     badge: "🚗 Transport",
     count: "300+ Drivers",
-    image: "/images/driver.png",
+    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80",
     description: "Personal chauffeur, daily commute, intercity travel, night shifts.",
   },
   {
@@ -69,7 +69,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Maid",
     badge: "🧹 Housekeeping",
     count: "800+ Helpers",
-    image: "/images/maid.png",
+    image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
     description: "Daily housekeeping, dish washing, floor mopping, laundry folding.",
   },
   {
@@ -78,7 +78,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Painter",
     badge: "🎨 Painting",
     count: "420+ Painters",
-    image: "/images/painter.png",
+    image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80",
     description: "Interior/exterior wall painting, waterproof coating, texture designs.",
   },
   {
@@ -87,7 +87,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Labour",
     badge: "💪 Labour",
     count: "1,500+ Workers",
-    image: "/images/labour.png",
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
     description: "Loading, unloading, construction assistance, shifting, manual tasks.",
   },
   {
@@ -96,7 +96,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Gardener",
     badge: "🌿 Gardening",
     count: "250+ Gardeners",
-    image: "/images/garder.png",
+    image: "https://images.unsplash.com/photo-1599685315640-9ceab2f58944?auto=format&fit=crop&w=800&q=80",
     description: "Balcony garden landscaping, plant repotting, lawn care, tree pruning.",
   },
   {
@@ -105,7 +105,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Interior Designer",
     badge: "✨ Design",
     count: "180+ Designers",
-    image: "/images/Interior.png",
+    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
     description: "Room styling, space planning, lighting design, modern renovation.",
   },
   {
@@ -114,7 +114,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Fitness Trainer",
     badge: "🏋️ Health",
     count: "200+ Trainers",
-    image: "/images/trainer.png",
+    image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=800&q=80",
     description: "Personal training, strength workouts, fat loss guidance, home sessions.",
   },
   {
@@ -123,7 +123,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Yoga Instructor",
     badge: "🧘 Wellness",
     count: "190+ Instructors",
-    image: "/images/Yoga.png",
+    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80",
     description: "Hatha, Vinyasa, Pranayama, meditation, posture alignment & healing.",
   },
   {
@@ -132,7 +132,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Teacher",
     badge: "📚 Education",
     count: "350+ Tutors",
-    image: "/images/teacher.png",
+    image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
     description: "School syllabus, mathematics, science, language tutoring for kids.",
   },
   {
@@ -141,7 +141,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Nurse",
     badge: "🩺 Healthcare",
     count: "160+ Caregivers",
-    image: "/images/nurse.png",
+    image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=800&q=80",
     description: "Patient care, elderly assistance, wound dressing, post-op support.",
   },
   {
@@ -150,7 +150,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Babysitter",
     badge: "👶 Childcare",
     count: "210+ Sitters",
-    image: "/images/baby.png",
+    image: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=800&q=80",
     description: "Infant & toddler care, storytelling, playful supervision, baby meals.",
   },
   {
@@ -159,7 +159,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Security Guard",
     badge: "🛡️ Security",
     count: "400+ Guards",
-    image: "/images/gurd.png",
+    image: "https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=800&q=80",
     description: "Residential & commercial security, visitor logs, 24/7 vigil.",
   },
   {
@@ -168,7 +168,7 @@ export const CATEGORIES: CategoryItem[] = [
     category: "Builder",
     badge: "🧱 Construction",
     count: "320+ Masons",
-    image: "/images/builder.png",
+    image: "https://images.unsplash.com/photo-1541888946425-d0fbb186f5f7?auto=format&fit=crop&w=800&q=80",
     description: "Brickwork, tile fitting, plastering, boundary wall, structural fixes.",
   },
 ];
