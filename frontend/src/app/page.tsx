@@ -16,10 +16,7 @@ import {
   Sparkles,
   CheckCircle2,
 } from "lucide-react";
-import {
-  generateFAQSchema,
-  generateLocalBusinessSchema,
-} from "@/lib/seo";
+import { generateFAQSchema } from "@/lib/seo";
 
 const HOME_FAQS = [
   {
@@ -54,69 +51,61 @@ const LOCAL_HUBS = [
     city: "Noida",
     slug: "noida",
     services: [
-      { name: "Electrician in Noida", path: "/services/electrician/noida" },
-      { name: "Plumber in Noida", path: "/services/plumber/noida" },
-      { name: "Carpenter in Noida", path: "/services/carpenter/noida" },
-      { name: "Cook in Noida", path: "/services/cook/noida" },
-      { name: "House Cleaning Noida", path: "/services/cleaner/noida" },
-      { name: "Painter in Noida", path: "/services/painter/noida" },
+      { name: "Electrician in Noida", path: "/results?category=Electrician&location=Noida" },
+      { name: "Plumber in Noida", path: "/results?category=Plumber&location=Noida" },
+      { name: "Carpenter in Noida", path: "/results?category=Carpenter&location=Noida" },
+      { name: "Cook in Noida", path: "/results?category=Cook&location=Noida" },
+      { name: "House Cleaning Noida", path: "/results?category=Cleaner&location=Noida" },
+      { name: "Painter in Noida", path: "/results?category=Painter&location=Noida" },
     ],
   },
   {
     city: "Greater Noida",
     slug: "greater-noida",
     services: [
-      { name: "Electrician in Greater Noida", path: "/services/electrician/greater-noida" },
-      { name: "Plumber in Greater Noida", path: "/services/plumber/greater-noida" },
-      { name: "Cook in Greater Noida", path: "/services/cook/greater-noida" },
-      { name: "Maid in Greater Noida", path: "/services/maid/greater-noida" },
-      { name: "Driver in Greater Noida", path: "/services/driver/greater-noida" },
-      { name: "Painter in Greater Noida", path: "/services/painter/greater-noida" },
+      { name: "Electrician in Greater Noida", path: "/results?category=Electrician&location=Greater%20Noida" },
+      { name: "Plumber in Greater Noida", path: "/results?category=Plumber&location=Greater%20Noida" },
+      { name: "Cook in Greater Noida", path: "/results?category=Cook&location=Greater%20Noida" },
+      { name: "Maid in Greater Noida", path: "/results?category=Maid&location=Greater%20Noida" },
+      { name: "Driver in Greater Noida", path: "/results?category=Driver&location=Greater%20Noida" },
+      { name: "Painter in Greater Noida", path: "/results?category=Painter&location=Greater%20Noida" },
     ],
   },
   {
     city: "Delhi",
     slug: "delhi",
     services: [
-      { name: "Electrician in Delhi", path: "/services/electrician/delhi" },
-      { name: "Plumber in Delhi", path: "/services/plumber/delhi" },
-      { name: "Painter in Delhi", path: "/services/painter/delhi" },
-      { name: "Cook / Chef in Delhi", path: "/services/cook/delhi" },
-      { name: "House Cleaning Delhi", path: "/services/cleaner/delhi" },
-      { name: "Carpenter in Delhi", path: "/services/carpenter/delhi" },
+      { name: "Electrician in Delhi", path: "/results?category=Electrician&location=Delhi" },
+      { name: "Plumber in Delhi", path: "/results?category=Plumber&location=Delhi" },
+      { name: "Painter in Delhi", path: "/results?category=Painter&location=Delhi" },
+      { name: "Cook / Chef in Delhi", path: "/results?category=Cook&location=Delhi" },
+      { name: "House Cleaning Delhi", path: "/results?category=Cleaner&location=Delhi" },
+      { name: "Carpenter in Delhi", path: "/results?category=Carpenter&location=Delhi" },
     ],
   },
   {
     city: "Ghaziabad & Gurgaon",
     slug: "ghaziabad",
     services: [
-      { name: "Electrician in Ghaziabad", path: "/services/electrician/ghaziabad" },
-      { name: "Plumber in Ghaziabad", path: "/services/plumber/ghaziabad" },
-      { name: "Electrician in Gurgaon", path: "/services/electrician/gurgaon" },
-      { name: "House Cleaner Gurgaon", path: "/services/cleaner/gurgaon" },
-      { name: "Painter in Gurgaon", path: "/services/painter/gurgaon" },
-      { name: "Plumber in Faridabad", path: "/services/plumber/faridabad" },
+      { name: "Electrician in Ghaziabad", path: "/results?category=Electrician&location=Ghaziabad" },
+      { name: "Plumber in Ghaziabad", path: "/results?category=Plumber&location=Ghaziabad" },
+      { name: "Electrician in Gurgaon", path: "/results?category=Electrician&location=Gurgaon" },
+      { name: "House Cleaner Gurgaon", path: "/results?category=Cleaner&location=Gurgaon" },
+      { name: "Painter in Gurgaon", path: "/results?category=Painter&location=Gurgaon" },
+      { name: "Plumber in Faridabad", path: "/results?category=Plumber&location=Faridabad" },
     ],
   },
 ];
 
 export default function HomePage() {
   const faqSchema = generateFAQSchema(HOME_FAQS);
-  const localBizSchema = generateLocalBusinessSchema({
-    name: "SkilledBoys Delhi NCR",
-    city: "Delhi NCR",
-  });
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Homepage JSON-LD Schemas */}
+      {/* Homepage FAQ structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBizSchema) }}
       />
 
       {/* Hero Section */}
