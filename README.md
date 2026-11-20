@@ -155,11 +155,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 🔑 Admin Credentials (Default)
-
-- **URL:** [http://localhost:3000/admin/login](http://localhost:3000/admin/login)
-- **Username:** `admin`
-- **Password:** `admin123`
 
 ---
 
