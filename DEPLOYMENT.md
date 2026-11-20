@@ -47,8 +47,7 @@ This guide walks you through deploying the modernized SkilledBoys platform live 
    | `NODE_ENV` | `production` |
    | `MONGO_URI` | `mongodb+srv://abhishekmishraadev_db_user:Abhishek%402003@abhishekdb.idmxnex.mongodb.net/SkilledBoys` |
    | `JWT_SECRET` | `skilledboys_production_jwt_secret_key_2025` |
-   | `ADMIN_USERNAME` | `admin` |
-   | `ADMIN_PASSWORD` | `admin123` |
+  
 6. Click **Deploy Web Service**.
 7. Once deployed, copy your Render URL (for example: `https://skilledboys.onrender.com`).
 
