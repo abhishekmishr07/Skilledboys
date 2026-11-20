@@ -26,7 +26,7 @@ export async function generateMetadata({
       if (Array.isArray(workers)) {
         const worker = workers.find((w) => w._id === id || w.id === id);
         if (worker) {
-          const title = `${worker.name} – Verified ${worker.category} in ${worker.location} | SkilledBoys`;
+          const title = `${worker.name} – Verified ${worker.category} in ${worker.location}`;
           const description = `Hire ${worker.name}, a trusted ${worker.category} in ${worker.location}. ${worker.experience || "Experienced"} with a ${worker.rating || "4.8"} rating. Call or WhatsApp directly with 0% commission.`;
           const url = `${SITE_URL}/workers/${id}`;
 

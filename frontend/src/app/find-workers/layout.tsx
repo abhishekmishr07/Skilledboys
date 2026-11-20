@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { SITE_URL, generateBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Find Verified Skilled Workers Near You | SkilledBoys",
+  title: "Find Verified Skilled Workers Near You",
   description:
     "Browse over 500+ verified electricians, plumbers, carpenters, cooks, cleaners, and painters across Noida, Greater Noida, Ghaziabad, and Delhi NCR. Direct call, zero commission.",
   keywords: [

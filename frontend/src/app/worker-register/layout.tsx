@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { SITE_URL, generateBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Register as a Worker / Professional – Join for Free | SkilledBoys",
+  title: "Register as a Worker / Professional – Join for Free",
   description:
     "Are you an electrician, plumber, carpenter, cook, cleaner, or painter? Register on SkilledBoys for free and get direct customer leads across Delhi NCR with zero commission fees.",
   keywords: [

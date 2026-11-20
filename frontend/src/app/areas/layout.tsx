@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { SITE_URL, generateBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Service Areas & Cities Covered | SkilledBoys",
+  title: "Service Areas & Cities Covered",
   description:
     "SkilledBoys connects households with verified local experts across Noida, Greater Noida, Delhi, Gurgaon, Ghaziabad, and Faridabad. Check active service coverage.",
   keywords: [

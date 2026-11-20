@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { SITE_URL, generateBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "All Service Categories | SkilledBoys Local Service Directory",
+  title: "All Service Categories | Service Directory",
   description:
     "Explore all 18+ service categories on SkilledBoys: Electricians, Plumbers, Carpenters, Home Cleaners, Cooks, Painters, Drivers, and Wellness Pros across Delhi NCR.",
   keywords: [

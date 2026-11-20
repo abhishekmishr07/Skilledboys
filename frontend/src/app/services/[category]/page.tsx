@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { category } = await params;
   const categoryTitle = slugToTitle(category);
 
-  const title = `Top Verified ${categoryTitle}s in Delhi NCR | SkilledBoys`;
+  const title = `Top Verified ${categoryTitle}s in Delhi NCR`;
   const description = `Find verified local ${categoryTitle.toLowerCase()} professionals in Noida, Greater Noida, Ghaziabad, Delhi and Gurgaon. Direct calling with zero commission on SkilledBoys.`;
   const canonicalUrl = `${SITE_URL}/services/${category}`;
 

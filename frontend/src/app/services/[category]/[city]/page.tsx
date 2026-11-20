@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const cityInfo = CITY_DETAILS[city.toLowerCase()];
   const cityName = cityInfo ? cityInfo.name : slugToTitle(city);
 
-  const title = `Best ${categoryTitle}s in ${cityName} | Verified Local Experts | SkilledBoys`;
+  const title = `Best ${categoryTitle}s in ${cityName} | Verified Local Experts`;
   const description = `Looking for trusted ${categoryTitle.toLowerCase()} services in ${cityName}? Find verified local professionals for same-day home visits. Direct calling with 0% commission on SkilledBoys.`;
   const canonicalUrl = `${SITE_URL}/services/${category}/${city}`;
 

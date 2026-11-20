@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { SITE_URL, generateBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "About Us – Empowering Local Workers & Households | SkilledBoys",
+  title: "About Us – Empowering Local Workers & Households",
   description:
     "Learn about SkilledBoys, founded by Abhishek Mishra in Greater Noida. We are on a mission to organize local skilled trades in India with zero commission and direct customer connect.",
   keywords: [

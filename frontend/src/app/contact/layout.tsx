@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { SITE_URL, generateBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Contact SkilledBoys | Customer Support & Worker Helpdesk",
+  title: "Contact & Customer Support",
   description:
     "Have questions or need assistance? Reach SkilledBoys support via WhatsApp (+91-8176033198), email (skilledboyss@gmail.com), or submit an inquiry. Based in Greater Noida, UP.",
   keywords: [
