@@ -5,11 +5,119 @@ import { StatsSection } from "@/components/home/StatsSection";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { CategoryCarousel } from "@/components/home/CategoryCarousel";
 import { Testimonials } from "@/components/home/Testimonials";
-import { ArrowRight, ShieldCheck, Zap, HeartHandshake } from "lucide-react";
+import {
+  ArrowRight,
+  ShieldCheck,
+  Zap,
+  HeartHandshake,
+  MapPin,
+  HelpCircle,
+  Sparkles,
+  CheckCircle2,
+} from "lucide-react";
+import {
+  generateFAQSchema,
+  generateLocalBusinessSchema,
+} from "@/lib/seo";
+
+const HOME_FAQS = [
+  {
+    question: "How does SkilledBoys work for hiring local experts?",
+    answer:
+      "SkilledBoys connects you directly with verified local service professionals like electricians, plumbers, carpenters, cooks, and cleaners. Simply search by service and locality (e.g., Electrician in Noida), browse profiles, and call or message them on WhatsApp directly. No intermediaries, no booking fees.",
+  },
+  {
+    question: "Is there any commission or booking fee charged by SkilledBoys?",
+    answer:
+      "No. SkilledBoys is 100% free for customers and charges zero commission to workers. You negotiate rates and pay the professional directly, ensuring total transparency and affordable pricing.",
+  },
+  {
+    question: "Which areas in Delhi NCR are covered by SkilledBoys?",
+    answer:
+      "SkilledBoys has active service professionals across Noida, Greater Noida, Ghaziabad, Delhi, Gurgaon, and Faridabad, covering major residential sectors, society high-rises, and commercial hubs.",
+  },
+  {
+    question: "How are workers verified on SkilledBoys?",
+    answer:
+      "Workers provide contact numbers, work experience, skill credentials, and live availability. Ratings and reviews from real local customers keep the community reliable and trustworthy.",
+  },
+  {
+    question: "How can skilled professionals register on SkilledBoys?",
+    answer:
+      "Skilled workers can join in under 2 minutes by clicking 'Register as Pro', selecting their trade (Electrician, Plumber, Painter, etc.), entering their service city, and setting their working hours. Registration is completely free.",
+  },
+];
+
+const LOCAL_HUBS = [
+  {
+    city: "Noida",
+    slug: "noida",
+    services: [
+      { name: "Electrician in Noida", path: "/services/electrician/noida" },
+      { name: "Plumber in Noida", path: "/services/plumber/noida" },
+      { name: "Carpenter in Noida", path: "/services/carpenter/noida" },
+      { name: "Cook in Noida", path: "/services/cook/noida" },
+      { name: "House Cleaning Noida", path: "/services/cleaner/noida" },
+      { name: "Painter in Noida", path: "/services/painter/noida" },
+    ],
+  },
+  {
+    city: "Greater Noida",
+    slug: "greater-noida",
+    services: [
+      { name: "Electrician in Greater Noida", path: "/services/electrician/greater-noida" },
+      { name: "Plumber in Greater Noida", path: "/services/plumber/greater-noida" },
+      { name: "Cook in Greater Noida", path: "/services/cook/greater-noida" },
+      { name: "Maid in Greater Noida", path: "/services/maid/greater-noida" },
+      { name: "Driver in Greater Noida", path: "/services/driver/greater-noida" },
+      { name: "Painter in Greater Noida", path: "/services/painter/greater-noida" },
+    ],
+  },
+  {
+    city: "Delhi",
+    slug: "delhi",
+    services: [
+      { name: "Electrician in Delhi", path: "/services/electrician/delhi" },
+      { name: "Plumber in Delhi", path: "/services/plumber/delhi" },
+      { name: "Painter in Delhi", path: "/services/painter/delhi" },
+      { name: "Cook / Chef in Delhi", path: "/services/cook/delhi" },
+      { name: "House Cleaning Delhi", path: "/services/cleaner/delhi" },
+      { name: "Carpenter in Delhi", path: "/services/carpenter/delhi" },
+    ],
+  },
+  {
+    city: "Ghaziabad & Gurgaon",
+    slug: "ghaziabad",
+    services: [
+      { name: "Electrician in Ghaziabad", path: "/services/electrician/ghaziabad" },
+      { name: "Plumber in Ghaziabad", path: "/services/plumber/ghaziabad" },
+      { name: "Electrician in Gurgaon", path: "/services/electrician/gurgaon" },
+      { name: "House Cleaner Gurgaon", path: "/services/cleaner/gurgaon" },
+      { name: "Painter in Gurgaon", path: "/services/painter/gurgaon" },
+      { name: "Plumber in Faridabad", path: "/services/plumber/faridabad" },
+    ],
+  },
+];
 
 export default function HomePage() {
+  const faqSchema = generateFAQSchema(HOME_FAQS);
+  const localBizSchema = generateLocalBusinessSchema({
+    name: "SkilledBoys Delhi NCR",
+    city: "Delhi NCR",
+  });
+
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Homepage JSON-LD Schemas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBizSchema) }}
+      />
+
       {/* Hero Section */}
       <HeroSection />
 
@@ -75,6 +183,87 @@ export default function HomePage() {
 
       {/* Testimonials */}
       <Testimonials />
+
+      {/* Local SEO Service Coverage Hub */}
+      <section className="py-20 bg-gray-50/70 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="text-xs font-bold uppercase tracking-wider text-brand-600 bg-white px-3 py-1 rounded-full border border-purple-100 shadow-xs">
+              Local Service Network
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mt-3 tracking-tight">
+              Local Home Services Across Delhi NCR
+            </h2>
+            <p className="text-gray-500 text-sm sm:text-base mt-2">
+              Quick access to top verified service professionals in your city and nearby neighborhoods.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {LOCAL_HUBS.map((hub) => (
+              <div
+                key={hub.city}
+                className="bg-white rounded-3xl p-6 border border-gray-100/90 shadow-soft"
+              >
+                <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-100">
+                  <MapPin className="h-4 w-4 text-brand-600" />
+                  <h3 className="font-black text-gray-900 text-base">
+                    {hub.city}
+                  </h3>
+                </div>
+
+                <ul className="space-y-2.5">
+                  {hub.services.map((srv) => (
+                    <li key={srv.path}>
+                      <Link
+                        href={srv.path}
+                        className="text-xs font-medium text-gray-600 hover:text-brand-600 transition flex items-center justify-between group"
+                      >
+                        <span>{srv.name}</span>
+                        <ArrowRight className="h-3 w-3 text-gray-400 group-hover:translate-x-0.5 group-hover:text-brand-600 transition-transform" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Homepage SEO FAQs */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-bold uppercase tracking-wider text-brand-600 bg-purple-50 px-3 py-1 rounded-full border border-purple-100">
+              Clear & Transparent
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mt-3 tracking-tight">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-gray-500 text-sm sm:text-base mt-1.5">
+              Everything you need to know about finding and hiring local professionals on SkilledBoys.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {HOME_FAQS.map((faq, idx) => (
+              <div
+                key={idx}
+                className="p-6 rounded-2xl bg-gray-50/70 border border-gray-100 hover:border-purple-200 transition"
+              >
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 flex items-start gap-3">
+                  <HelpCircle className="h-5 w-5 text-brand-600 mt-0.5 flex-shrink-0" />
+                  <span>{faq.question}</span>
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-600 mt-2.5 pl-8 leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Call To Action Banner */}
       <section className="py-20 bg-purple-50">

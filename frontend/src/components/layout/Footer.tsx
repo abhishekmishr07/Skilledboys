@@ -132,32 +132,32 @@ export function Footer() {
             <h4 className="text-white font-bold text-base tracking-wide">Top Services</h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/results?category=Electrician" className="hover:text-purple-400 transition">
+                <Link href="/services/electrician" className="hover:text-purple-400 transition">
                   Electricians
                 </Link>
               </li>
               <li>
-                <Link href="/results?category=Plumber" className="hover:text-purple-400 transition">
+                <Link href="/services/plumber" className="hover:text-purple-400 transition">
                   Plumbers
                 </Link>
               </li>
               <li>
-                <Link href="/results?category=Carpenter" className="hover:text-purple-400 transition">
+                <Link href="/services/carpenter" className="hover:text-purple-400 transition">
                   Carpenters
                 </Link>
               </li>
               <li>
-                <Link href="/results?category=Cook" className="hover:text-purple-400 transition">
+                <Link href="/services/cook" className="hover:text-purple-400 transition">
                   Cooks &amp; Chefs
                 </Link>
               </li>
               <li>
-                <Link href="/results?category=Cleaner" className="hover:text-purple-400 transition">
+                <Link href="/services/cleaner" className="hover:text-purple-400 transition">
                   Home Cleaning
                 </Link>
               </li>
               <li>
-                <Link href="/results?category=Driver" className="hover:text-purple-400 transition">
+                <Link href="/services/driver" className="hover:text-purple-400 transition">
                   Drivers
                 </Link>
               </li>

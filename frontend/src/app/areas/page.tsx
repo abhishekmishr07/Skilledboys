@@ -81,6 +81,7 @@ export default function AreasPage() {
                   src={city.image}
                   alt={city.name}
                   fill
+                  unoptimized
                   className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-90"
                 />
 
