@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Service Areas - Skilled Boys</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <!-- 🔍 Search Bar -->
+  <div class="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 w-4/5 md:w-1/2">
+    <input 
+      type="text" 
+      id="citySearch" 
+      placeholder="🔍 Search for a city..." 
+      oninput="filterCities()"
+      class="w-full px-6 py-3 rounded-full shadow-lg border border-gray-200 focus:ring-2 focus:ring-purple-600 focus:outline-none text-gray-700 placeholder-gray-400"
+    />
+  </div>
+
+  <!-- 🏙️ Swiper Slider -->
+  <div class="swiper mySwiper w-full h-screen">
+    <div class="swiper-wrapper" id="citySlider">
+      <!-- Slides will be injected -->
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script>
+    const cities = [
+      { name: 'Delhi NCR', image: '/images/delhi1.png' },
+      { name: 'Mumbai', image: '/images/mumbai.png' },
+      { name: 'Bengaluru', image: '/images/bengaluru.png' },
+      { name: 'Kolkata', image: '/images/kolkata.png' },
+      { name: 'Chennai', image: '/images/chennai.png' },
+      { name: 'Hyderabad', image: '/images/hydrabad.png' },
+      { name: 'Jaipur', image: '/images/jaipur.png' },
+      { name: 'Lucknow', image: '/images/lucknow1.png' },
+      { name: 'Patna', image: '/images/patna.png' },
+      { name: 'Indore', image: '/images/indore.png' },
+      { name: 'Gorakhpur', image: '/images/gorakhpur1.png' },
+    ];
+
+    const citySlider = document.getElementById('citySlider');
+
+    function renderCities(filteredCities) {
+      citySlider.innerHTML = '';
+      filteredCities.forEach(city => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide relative flex items-center justify-center bg-cover bg-center';
+        slide.style.backgroundImage = `url(${city.image})`;
+        slide.innerHTML = `
+          <div class="absolute inset-0 bg-black/40"></div>
+          <h2 class="relative text-5xl md:text-7xl font-extrabold text-white drop-shadow-lg">
+            ${city.name}
+          </h2>
+        `;
+        citySlider.appendChild(slide);
+      });
+
+      if (window.swiperInstance) {
+        window.swiperInstance.update();
+      } else {
+        window.swiperInstance = new Swiper(".mySwiper", {
+          loop: true,
+          autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+          },
+          effect: "fade",
+          fadeEffect: { crossFade: true },
+        });
+      }
+    }
+
+    function filterCities() {
+      const query = document.getElementById('citySearch').value.toLowerCase();
+      const filtered = cities.filter(city => city.name.toLowerCase().includes(query));
+      renderCities(filtered);
+    }
+
+    renderCities(cities);
+  </script>
+</body>
+</html>

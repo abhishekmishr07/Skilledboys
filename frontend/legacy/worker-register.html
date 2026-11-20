@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Worker Registration - SkilledBoys</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white shadow-lg rounded-xl p-8 w-full max-w-lg">
+    <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">Worker Registration</h2>
+    <form id="workerForm" class="space-y-4">
+      
+      <input type="text" name="name" placeholder="Full Name" required 
+        class="w-full p-3 border rounded-lg">
+
+      <input type="number" name="number" placeholder="Phone Number" required 
+        class="w-full p-3 border rounded-lg">
+
+      <!-- Add Password Field -->
+      <input type="password" name="password" placeholder="Create Password" required 
+        class="w-full p-3 border rounded-lg">
+
+      <!-- Worker Category -->
+      <select name="category" required class="w-full p-3 border rounded-lg">
+        <option value="">Select Category</option>
+        <option value="Electrician">Electrician</option>
+        <option value="Plumber">Plumber</option>
+        <option value="Cook">Cook</option>
+        <option value="Carpenter">Carpenter</option>
+        <option value="Painter">Painter</option>
+        <option value="Driver">Driver</option>
+      </select>
+
+      <!-- Location Dropdown -->
+      <select name="location" required class="w-full p-3 border rounded-lg">
+        <option value="">Select Location</option>
+        <option value="Noida">Noida</option>
+        <option value="Greater Noida">Greater Noida</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Ghaziabad">Ghaziabad</option>
+        <option value="Gurugram">Gurugram</option>
+        <option value="Faridabad">Faridabad</option>
+      </select>
+
+      <input type="number" name="experience" placeholder="Experience (in years)" required 
+        class="w-full p-3 border rounded-lg">
+
+      <input type="number" name="age" placeholder="Age (in years)" required 
+        class="w-full p-3 border rounded-lg">
+
+      <select name="gender" required class="w-full p-3 border rounded-lg">
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+
+      <!-- <label class="block font-semibold">Working Time:</label>
+      <div class="flex gap-2">
+        <input type="time" name="startTime" required class="w-1/2 p-3 border rounded-lg">
+        <input type="time" name="endTime" required class="w-1/2 p-3 border rounded-lg">
+      </div> -->
+
+      <!-- Register Button -->
+      <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700">
+        Register
+      </button>
+
+      <!-- Already Registered Button -->
+      <button type="button" onclick="window.location.href='worker-login.html'" 
+        class="w-full bg-red-500 text-white p-3 rounded-lg hover:bg-red-600 mt-2">
+        Already Registered? Login
+      </button>
+
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("workerForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      const res = await fetch("https://skilledboys-backend-u54y.onrender.com/api/workers/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      alert(result.message);
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
