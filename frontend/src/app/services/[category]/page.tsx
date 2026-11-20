@@ -14,7 +14,6 @@ import {
 import { CATEGORIES } from "@/lib/constants";
 import {
   SITE_URL,
-  generateLocalBusinessSchema,
   generateBreadcrumbSchema,
   generateFAQSchema,
 } from "@/lib/seo";
@@ -114,12 +113,6 @@ export default async function ServiceCategoryPage({ params }: PageProps) {
     { name: categoryTitle, url: `/services/${category}` },
   ]);
 
-  const localBusinessSchema = generateLocalBusinessSchema({
-    name: `${categoryTitle} Services Network`,
-    category: categoryTitle,
-    city: "Delhi NCR",
-    description: `Hire top verified ${categoryTitle.toLowerCase()}s across Delhi NCR with zero platform fee. Direct WhatsApp and call booking.`,
-  });
 
   return (
     <div className="min-h-screen bg-gray-50/50 py-10">
@@ -127,10 +120,7 @@ export default async function ServiceCategoryPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
