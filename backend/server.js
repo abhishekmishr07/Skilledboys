@@ -4,16 +4,107 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const crypto = require("crypto");
 
 const app = express();
 
-// Middleware
-app.use(cors({
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
-app.use(express.json());
+// Security Headers via Helmet
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    contentSecurityPolicy: false,
+  })
+);
+
+// Restricted CORS Configuration
+const allowedOrigins = [
+  "https://skilledboys.com",
+  "https://www.skilledboys.com",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "http://localhost:5000",
+  "http://127.0.0.1:5000",
+  "http://127.0.0.1:5099",
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        origin.endsWith(".skilledboys.com") ||
+        origin.endsWith(".onrender.com") ||
+        origin.endsWith(".netlify.app")
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS policy restriction: origin not allowed"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
+
+// Payload size limit to prevent Denial of Service attacks
+app.use(express.json({ limit: "150kb" }));
+app.use(express.urlencoded({ extended: true, limit: "150kb" }));
+
+// Rate Limiters for Brute Force & Abuse Protection
+const generalApiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 300,
+  message: { success: false, message: "Too many requests. Please try again later." },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const authRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // 10 attempts per 15 minutes
+  message: { success: false, message: "Too many login attempts. Please wait 15 minutes before trying again." },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const registerRateLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 15,
+  message: { success: false, message: "Registration rate limit exceeded. Please try again later." },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const contactRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: { success: false, message: "Too many messages sent. Please wait a few minutes." },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use("/api/", generalApiLimiter);
+
+// Constant-Time String Compare to prevent Timing Attacks
+function safeStringCompare(a, b) {
+  const bufA = Buffer.from(String(a || ""));
+  const bufB = Buffer.from(String(b || ""));
+  if (bufA.length !== bufB.length) {
+    crypto.timingSafeEqual(bufA, bufA);
+    return false;
+  }
+  return crypto.timingSafeEqual(bufA, bufB);
+}
+
+// Regex / String Sanitizer to prevent NoSQL ReDoS & Injection
+function sanitizeSearchString(input) {
+  if (typeof input !== "string") return "";
+  return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").trim();
+}
 
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://abhishekmishraadev_db_user:Abhishek%402003@abhishekdb.idmxnex.mongodb.net/SkilledBoys";
@@ -324,29 +415,38 @@ app.get("/api/workers", async (req, res) => {
   if (isDbConnected) {
     try {
       let query = {};
-      if (category && category.trim()) {
-        query.category = new RegExp(`^${category.trim()}$`, "i");
+      if (category && typeof category === "string" && category.trim()) {
+        const cleanCat = sanitizeSearchString(category);
+        if (cleanCat) query.category = new RegExp(`^${cleanCat}$`, "i");
       }
-      if (location && location.trim()) {
-        query.location = new RegExp(`^${location.trim()}$`, "i");
+      if (location && typeof location === "string" && location.trim()) {
+        const cleanLoc = sanitizeSearchString(location);
+        if (cleanLoc) query.location = new RegExp(`^${cleanLoc}$`, "i");
       }
-      if (status && status.trim()) {
-        query.status = status.trim();
+      if (status && typeof status === "string" && status.trim()) {
+        query.status = sanitizeSearchString(status);
       }
-      if (gender && gender.trim()) {
-        query.gender = new RegExp(`^${gender.trim()}$`, "i");
+      if (gender && typeof gender === "string" && gender.trim()) {
+        const cleanGen = sanitizeSearchString(gender);
+        if (cleanGen) query.gender = new RegExp(`^${cleanGen}$`, "i");
       }
       if (minRating) {
-        query.rating = { $gte: parseFloat(minRating) };
+        const parsed = parseFloat(minRating);
+        if (!isNaN(parsed) && parsed >= 0 && parsed <= 5) {
+          query.rating = { $gte: parsed };
+        }
       }
-      if (search && search.trim()) {
-        const sRegex = new RegExp(search.trim(), "i");
-        query.$or = [
-          { name: sRegex },
-          { category: sRegex },
-          { location: sRegex },
-          { bio: sRegex },
-        ];
+      if (search && typeof search === "string" && search.trim()) {
+        const cleanSearch = sanitizeSearchString(search);
+        if (cleanSearch) {
+          const sRegex = new RegExp(cleanSearch, "i");
+          query.$or = [
+            { name: sRegex },
+            { category: sRegex },
+            { location: sRegex },
+            { bio: sRegex },
+          ];
+        }
       }
 
       const workers = await Worker.find(query).select("-password").sort({ rating: -1, createdAt: -1 });
@@ -386,7 +486,7 @@ app.get("/api/workers", async (req, res) => {
 });
 
 // Register Worker
-app.post("/api/workers/register", async (req, res) => {
+app.post("/api/workers/register", registerRateLimiter, async (req, res) => {
   try {
     const {
       name, number, password, category, location,
@@ -400,29 +500,48 @@ app.post("/api/workers/register", async (req, res) => {
       });
     }
 
+    // Input Validation
+    if (typeof name !== "string" || name.trim().length < 2 || name.trim().length > 80) {
+      return res.status(400).json({ success: false, message: "Name must be between 2 and 80 characters." });
+    }
+
+    const cleanNumber = String(number).trim().replace(/[\s-]/g, "");
+    if (!/^\+?[0-9]{10,14}$/.test(cleanNumber)) {
+      return res.status(400).json({ success: false, message: "Please provide a valid 10 to 14-digit phone number." });
+    }
+
+    if (typeof password !== "string" || password.length < 6) {
+      return res.status(400).json({ success: false, message: "Password must be at least 6 characters long." });
+    }
+
+    const cleanAge = Number(age);
+    if (isNaN(cleanAge) || cleanAge < 18 || cleanAge > 80) {
+      return res.status(400).json({ success: false, message: "Age must be between 18 and 80." });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     if (isDbConnected) {
-      const existingWorker = await Worker.findOne({ number });
+      const existingWorker = await Worker.findOne({ number: cleanNumber });
       if (existingWorker) {
         return res.status(400).json({ success: false, message: "A worker with this phone number is already registered!" });
       }
 
       const newWorker = new Worker({
-        name,
-        number,
-        phone:      phone || number,
+        name:       name.trim(),
+        number:     cleanNumber,
+        phone:      phone ? String(phone).trim() : cleanNumber,
         password:   hashedPassword,
-        category,
-        location,
-        experience: Number(experience) || 0,
+        category:   category.trim(),
+        location:   location.trim(),
+        experience: Math.max(0, Math.min(50, Number(experience) || 0)),
         gender:     gender || "Male",
         startTime:  startTime || "09:00",
         endTime:    endTime || "18:00",
-        age:        Number(age),
+        age:        cleanAge,
         photo:      photo || "/images/electrician.png",
-        hourlyRate: Number(hourlyRate) || 299,
-        bio:        bio || `${name} is an experienced ${category} in ${location}.`,
+        hourlyRate: Math.max(50, Math.min(10000, Number(hourlyRate) || 299)),
+        bio:        bio ? String(bio).trim().slice(0, 500) : `${name.trim()} is an experienced ${category.trim()} in ${location.trim()}.`,
       });
 
       await newWorker.save();
@@ -430,29 +549,29 @@ app.post("/api/workers/register", async (req, res) => {
     }
 
     // Fallback in memory
-    const existingMem = memoryWorkers.find(w => w.number === number);
+    const existingMem = memoryWorkers.find(w => w.number === cleanNumber);
     if (existingMem) {
       return res.status(400).json({ success: false, message: "A worker with this phone number is already registered!" });
     }
 
     const memWorker = {
       _id: `mem_${Date.now()}`,
-      name,
-      number,
-      phone: phone || number,
+      name: name.trim(),
+      number: cleanNumber,
+      phone: phone ? String(phone).trim() : cleanNumber,
       password: hashedPassword,
-      category,
-      location,
-      experience: Number(experience) || 0,
+      category: category.trim(),
+      location: location.trim(),
+      experience: Math.max(0, Math.min(50, Number(experience) || 0)),
       gender: gender || "Male",
       startTime: startTime || "09:00",
       endTime: endTime || "18:00",
-      age: Number(age),
+      age: cleanAge,
       rating: 4.8,
       photo: photo || "/images/electrician.png",
       status: "working",
-      hourlyRate: Number(hourlyRate) || 299,
-      bio: bio || `${name} is an experienced ${category} in ${location}.`,
+      hourlyRate: Math.max(50, Math.min(10000, Number(hourlyRate) || 299)),
+      bio: bio ? String(bio).trim().slice(0, 500) : `${name.trim()} is an experienced ${category.trim()} in ${location.trim()}.`,
       createdAt: new Date(),
     };
     memoryWorkers.unshift(memWorker);
@@ -460,33 +579,35 @@ app.post("/api/workers/register", async (req, res) => {
     return res.json({ success: true, message: "✅ Worker registered successfully! You can now login." });
   } catch (err) {
     console.error("Worker register error:", err);
-    res.status(500).json({ success: false, message: "Error registering worker: " + err.message });
+    res.status(500).json({ success: false, message: "Error registering worker. Please verify your details." });
   }
 });
 
 // Worker Login
-app.post("/api/workers/login", async (req, res) => {
+app.post("/api/workers/login", authRateLimiter, async (req, res) => {
   const { number, password } = req.body;
 
   if (!number || !password) {
     return res.status(400).json({ success: false, message: "Phone number and password are required" });
   }
 
+  const cleanNumber = String(number).trim().replace(/[\s-]/g, "");
+
   try {
     let worker = null;
     if (isDbConnected) {
-      worker = await Worker.findOne({ number });
+      worker = await Worker.findOne({ number: cleanNumber });
     } else {
-      worker = memoryWorkers.find(w => w.number === number);
+      worker = memoryWorkers.find(w => w.number === cleanNumber);
     }
 
     if (!worker) {
       return res.status(400).json({ success: false, message: "No worker found with this phone number" });
     }
 
-    const isMatch = await bcrypt.compare(password, worker.password);
+    const isMatch = await bcrypt.compare(String(password), worker.password);
     if (!isMatch) {
-      return res.status(400).json({ success: false, message: "Invalid password credentials" });
+      return res.status(400).json({ success: false, message: "Invalid credentials" });
     }
 
     const token = jwt.sign({ id: worker._id, number: worker.number }, JWT_SECRET, { expiresIn: "7d" });
@@ -613,34 +734,59 @@ app.put("/api/workers/:id", authMiddleware, async (req, res) => {
 
 // ================= CONTACT INQUIRY ENDPOINT =================
 
-app.post("/api/contact", async (req, res) => {
+app.post("/api/contact", contactRateLimiter, async (req, res) => {
   try {
     const { name, email, phone, queryType, message } = req.body;
     if (!name || !email) {
       return res.status(400).json({ success: false, message: "Name and email are required" });
     }
 
+    if (typeof name !== "string" || name.trim().length < 2 || name.trim().length > 100) {
+      return res.status(400).json({ success: false, message: "Please provide a valid name" });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (typeof email !== "string" || !emailRegex.test(email.trim())) {
+      return res.status(400).json({ success: false, message: "Please provide a valid email address" });
+    }
+
+    const cleanData = {
+      name: name.trim().slice(0, 100),
+      email: email.trim().toLowerCase().slice(0, 100),
+      phone: phone ? String(phone).trim().slice(0, 20) : "",
+      queryType: queryType ? String(queryType).trim().slice(0, 50) : "General Inquiry",
+      message: message ? String(message).trim().slice(0, 2000) : "",
+    };
+
     if (isDbConnected) {
-      const inquiry = new ContactInquiry({ name, email, phone, queryType, message });
+      const inquiry = new ContactInquiry(cleanData);
       await inquiry.save();
     } else {
-      memoryInquiries.unshift({ id: Date.now(), name, email, phone, queryType, message, createdAt: new Date() });
+      memoryInquiries.unshift({ id: Date.now(), ...cleanData, createdAt: new Date() });
     }
 
     res.json({ success: true, message: "Thank you for reaching out! Our team will contact you shortly." });
   } catch (err) {
     console.error("Contact inquiry error:", err);
-    res.status(500).json({ success: false, message: "Failed to submit inquiry" });
+    res.status(500).json({ success: false, message: "Failed to submit inquiry. Please try again." });
   }
 });
 
 // ================= ADMIN DASHBOARD & CRUD ENDPOINTS =================
 
 // Admin Login
-app.post("/api/admin/login", async (req, res) => {
+app.post("/api/admin/login", authRateLimiter, async (req, res) => {
   const { username, password } = req.body;
 
-  if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+  if (!username || !password) {
+    return res.status(400).json({ success: false, message: "Username and password are required" });
+  }
+
+  // Constant-time credential check against timing attacks
+  const usernameMatch = safeStringCompare(username, ADMIN_USERNAME);
+  const passwordMatch = safeStringCompare(password, ADMIN_PASSWORD);
+
+  if (usernameMatch && passwordMatch) {
     const token = jwt.sign(
       { username: ADMIN_USERNAME, isAdmin: true },
       JWT_SECRET,
@@ -725,12 +871,23 @@ app.get("/api/admin/workers", adminAuthMiddleware, async (req, res) => {
 
     if (isDbConnected) {
       let query = {};
-      if (category) query.category = new RegExp(`^${category}$`, "i");
-      if (location) query.location = new RegExp(`^${location}$`, "i");
-      if (status) query.status = status;
-      if (search) {
-        const sRegex = new RegExp(search, "i");
-        query.$or = [{ name: sRegex }, { number: sRegex }, { category: sRegex }, { location: sRegex }];
+      if (category && typeof category === "string") {
+        const cleanCat = sanitizeSearchString(category);
+        if (cleanCat) query.category = new RegExp(`^${cleanCat}$`, "i");
+      }
+      if (location && typeof location === "string") {
+        const cleanLoc = sanitizeSearchString(location);
+        if (cleanLoc) query.location = new RegExp(`^${cleanLoc}$`, "i");
+      }
+      if (status && typeof status === "string") {
+        query.status = sanitizeSearchString(status);
+      }
+      if (search && typeof search === "string") {
+        const cleanSearch = sanitizeSearchString(search);
+        if (cleanSearch) {
+          const sRegex = new RegExp(cleanSearch, "i");
+          query.$or = [{ name: sRegex }, { number: sRegex }, { category: sRegex }, { location: sRegex }];
+        }
       }
 
       const workers = await Worker.find(query).select("-password").sort({ createdAt: -1 });
