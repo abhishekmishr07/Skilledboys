@@ -63,14 +63,14 @@ export function HeroSection() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-tr from-brand-300/20 to-purple-400/20 blur-3xl -z-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
           {/* Left Column: Heading & Controls */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7 space-y-6"
+            className="lg:col-span-6 space-y-6"
           >
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 text-brand-700 text-xs font-bold tracking-wide uppercase">
               <ShieldCheck className="h-4 w-4" />
@@ -186,36 +186,41 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          {/* Right Column: Hero Graphic */}
+          {/* Right Column: Hero Graphic - Real Indian Skilled Professionals Team */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:col-span-5 flex justify-center"
+            className="lg:col-span-6 flex justify-center w-full"
           >
-            <div className="relative w-full max-w-md sm:max-w-lg">
-              <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-purple-100 bg-white h-[380px] sm:h-[440px]">
+            <div className="relative w-full max-w-xl lg:max-w-none">
+              {/* Aspect Ratio 16:9 Frame to preserve all 10 professionals without cropping */}
+              <div className="relative z-10 w-full aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-purple-100 bg-gray-100">
                 <Image
-                  src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1000&q=80"
-                  alt="Verified Skilled Professional at work in Delhi NCR"
+                  src="/images/hero-team.jpg"
+                  alt="SkilledBoys Verified Local Service Professionals Team in Delhi NCR"
                   fill
-                  unoptimized
                   priority
-                  className="object-cover transform hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center transform hover:scale-103 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-transparent to-black/20" />
 
-                {/* Sub-card overlay at bottom of hero photo */}
-                <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-lg border border-white/60">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-xs font-bold text-gray-900 flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        Verified Local Experts
+                {/* Subtle soft gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-transparent to-black/10 pointer-events-none" />
+
+                {/* Bottom glassmorphic overlay bar */}
+                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 shadow-lg border border-white/60">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="min-w-0">
+                      <div className="text-xs sm:text-sm font-black text-gray-900 flex items-center gap-1.5 truncate">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span>
+                        Verified Local Pro Network
                       </div>
-                      <div className="text-[11px] text-gray-500 mt-0.5">Electricians, Plumbers, Cooks in Delhi NCR</div>
+                      <div className="text-[10px] sm:text-[11px] text-gray-500 mt-0.5 truncate">
+                        Electricians, Plumbers, Carpenters, Cooks &amp; Maids
+                      </div>
                     </div>
-                    <span className="text-xs font-extrabold text-brand-700 bg-purple-100 px-2.5 py-1 rounded-xl">
+                    <span className="text-[11px] sm:text-xs font-black text-brand-700 bg-purple-100 px-2.5 py-1 rounded-xl whitespace-nowrap flex-shrink-0">
                       0% Commission
                     </span>
                   </div>
@@ -223,20 +228,20 @@ export function HeroSection() {
               </div>
 
               {/* Floating Verified Badge */}
-              <div className="absolute -bottom-4 -left-3 sm:-left-5 z-20 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-purple-100 flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">
+              <div className="absolute -bottom-3 sm:-bottom-4 -left-2 sm:-left-3 z-20 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-xl border border-purple-100 flex items-center gap-2.5">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-black text-xs">
                   ✓
                 </div>
                 <div>
                   <div className="text-xs font-bold text-gray-900">Direct Phone Calling</div>
-                  <div className="text-[10px] text-gray-500">Call directly, no middleman</div>
+                  <div className="text-[10px] text-gray-500">100% Free • No Middlemen</div>
                 </div>
               </div>
 
               {/* Floating Star Badge */}
-              <div className="absolute -top-3.5 -right-3 sm:-right-4 z-20 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-xl border border-purple-100 flex items-center gap-1.5">
-                <span className="text-amber-500 font-black text-sm">★ 4.8 / 5.0</span>
-                <span className="text-xs text-gray-600 font-medium">Top Rated</span>
+              <div className="absolute -top-3 sm:-top-3.5 -right-2 sm:-right-3 z-20 bg-white/95 backdrop-blur-md px-3 sm:px-3.5 py-1.5 rounded-2xl shadow-xl border border-purple-100 flex items-center gap-1.5">
+                <span className="text-amber-500 font-black text-xs sm:text-sm">★ 4.8 / 5.0</span>
+                <span className="text-[10px] sm:text-[11px] text-gray-600 font-semibold">Top Rated</span>
               </div>
             </div>
           </motion.div>
