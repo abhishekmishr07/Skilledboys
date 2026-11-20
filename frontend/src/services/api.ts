@@ -6,7 +6,7 @@ import {
   ContactInquiry,
 } from "@/types";
 
-const DEFAULT_PRODUCTION_API_URL = "https://skilledboys-backend-u54y.onrender.com";
+const DEFAULT_PRODUCTION_API_URL = "https://skilledboys.onrender.com";
 
 const getApiBaseUrl = (): string => {
   if (process.env.NEXT_PUBLIC_API_URL) {

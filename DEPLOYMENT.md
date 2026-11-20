@@ -50,7 +50,7 @@ This guide walks you through deploying the modernized SkilledBoys platform live 
    | `ADMIN_USERNAME` | `admin` |
    | `ADMIN_PASSWORD` | `admin123` |
 6. Click **Deploy Web Service**.
-7. Once deployed, copy your Render URL (for example: `https://skilledboys-backend-u54y.onrender.com`).
+7. Once deployed, copy your Render URL (for example: `https://skilledboys.onrender.com`).
 
 ---
 
@@ -65,7 +65,7 @@ This guide walks you through deploying the modernized SkilledBoys platform live 
 5. Expand **Environment Variables** and add:
    | Name | Value |
    |---|---|
-   | `NEXT_PUBLIC_API_URL` | Your Render URL from Step 2 (e.g. `https://skilledboys-backend-u54y.onrender.com`) |
+   | `NEXT_PUBLIC_API_URL` | Your Render URL from Step 2 (e.g. `https://skilledboys.onrender.com`) |
    | `NEXT_PUBLIC_SITE_URL` | `https://www.skilledboys.com` (or your vercel app URL) |
    | `NEXT_PUBLIC_SITE_NAME` | `SkilledBoys` |
    | `NEXT_PUBLIC_WHATSAPP_NUMBER` | `8176033198` |

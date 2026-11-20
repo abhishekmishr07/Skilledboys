@@ -52,7 +52,7 @@ if (!token || !workerId) {
   statusBtn.addEventListener("click", async () => {
     statusBtn.disabled = true;
     try {
-      const res = await fetch(`https://skilledboys-backend-u54y.onrender.com/api/workers/status/${encodeURIComponent(workerId)}`, {
+      const res = await fetch(`https://skilledboys.onrender.com/api/workers/status/${encodeURIComponent(workerId)}`, {
         method: "PUT",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -71,7 +71,7 @@ if (!token || !workerId) {
   // --- Load Worker Profile from backend ---
   async function loadWorkerProfile() {
     try {
-      const res = await fetch("https://skilledboys-backend-u54y.onrender.com/api/workers/profile", {
+      const res = await fetch("https://skilledboys.onrender.com/api/workers/profile", {
         headers: { "Authorization": `Bearer ${token}` }
       });
       const data = await res.json();
