@@ -86,7 +86,7 @@ export const metadata: Metadata = {
     creator: "@skilledboys",
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+    google: "o_w-T53iexp3HdaruFazxzNJXw6TOJe2ZFd9wNUG6Oo",
   },
 };
 
@@ -102,6 +102,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta
+          name="google-site-verification"
+          content="o_w-T53iexp3HdaruFazxzNJXw6TOJe2ZFd9wNUG6Oo"
+        />
         {/* Organization Schema */}
         <script
           type="application/ld+json"
