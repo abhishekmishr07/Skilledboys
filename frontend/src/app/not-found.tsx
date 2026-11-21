@@ -49,16 +49,16 @@ export default function NotFound() {
 
     if (legacyRedirectMap[path]) {
       setRedirecting(true);
-      router.replace(legacyRedirectMap[path]);
+      window.location.replace(legacyRedirectMap[path]);
       return;
     }
 
     if (path.endsWith(".html")) {
       const cleanPath = path.replace(/\.html$/, "");
       setRedirecting(true);
-      router.replace(cleanPath);
+      window.location.replace(cleanPath);
     }
-  }, [router]);
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

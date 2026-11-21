@@ -1,0 +1,20 @@
+# Netlify Static 301 Redirects for Legacy URLs & Google Sitelinks
+/landing    /    301!
+/landing.html    /    301!
+/skilled-workers-image    /    301!
+/area    /areas    301!
+/area.html    /areas    301!
+/areas.html    /areas    301!
+/category    /categories    301!
+/category.html    /categories    301!
+/categories.html    /categories    301!
+/result    /find-workers    301!
+/result.html    /find-workers    301!
+/results.html    /find-workers    301!
+/about.html    /about    301!
+/contact.html    /contact    301!
+/login.html    /login    301!
+/register.html    /register    301!
+/worker-login.html    /worker-login    301!
+/worker-register.html    /worker-register    301!
+/worker-dashboard.html    /worker-dashboard    301!
