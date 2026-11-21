@@ -14,3 +14,118 @@
   NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION = "o_w-T53iexp3HdaruFazxzNJXw6TOJe2ZFd9wNUG6Oo"
   NEXT_PUBLIC_WHATSAPP_NUMBER = "8176033198"
   NEXT_PUBLIC_CONTACT_EMAIL = "skilledboyss@gmail.com"
+
+# Google Sitelink & Legacy URL 301 Permanent Redirects
+[[redirects]]
+  from = "/landing"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/landing.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/skilled-workers-image"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/area"
+  to = "/areas"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/area.html"
+  to = "/areas"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/areas.html"
+  to = "/areas"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/category"
+  to = "/categories"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/category.html"
+  to = "/categories"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories.html"
+  to = "/categories"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/result"
+  to = "/find-workers"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/result.html"
+  to = "/find-workers"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/results.html"
+  to = "/find-workers"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/login.html"
+  to = "/login"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/register.html"
+  to = "/register"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/worker-login.html"
+  to = "/worker-login"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/worker-register.html"
+  to = "/worker-register"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/worker-dashboard.html"
+  to = "/worker-dashboard"
+  status = 301
+  force = true
